@@ -1,0 +1,71 @@
+specification {
+  element actor
+  element system
+  element component
+  element database
+  relationship calls
+  deploymentNode environment
+  deploymentNode node
+}
+
+model {
+  worker = actor 'Worker'
+  client = actor 'Client'
+
+  jobs = system 'Job Platform' {
+    webApp = component 'Web App' {
+      technology 'TypeScript'
+      metadata {
+        specbridge_requirements 'job-submission/job-submission'
+        specbridge_provides 'JobApi.Jobs.claimJob'
+      }
+    }
+    jobService = component 'JobService' {
+      technology 'Go'
+      metadata {
+        specbridge_provides 'JobApi.Jobs'
+        specbridge_owns 'JobApi.Job'
+      }
+    }
+    jobQueue = database 'JobQueue' {
+      technology 'PostgreSQL'
+    }
+
+    webApp -[calls]-> jobService 'submits jobs' {
+      metadata {
+        specbridge_operations 'JobApi.Jobs.submitJob'
+      }
+    }
+    jobService -[calls]-> jobQueue 'enqueues and dequeues jobs'
+    webApp -[calls]-> jobQueue 'reads job status directly'
+    jobQueue -[calls]-> jobService 'notifies about expired leases'
+  }
+
+  client -> jobs.webApp 'uses'
+  worker -[calls]-> jobs.jobService 'claims and completes jobs' {
+    metadata {
+      specbridge_operations 'JobApi.Jobs.claimJob, JobApi.Jobs.completeJob, JobApi.Jobs.getJob'
+    }
+  }
+}
+
+views {
+  view index {
+    include *
+  }
+  dynamic view claimFlow {
+    title 'Claim a job'
+    worker -> jobs.jobService 'POST /jobs/{id}/claim'
+    jobs.jobService -> jobs.jobQueue 'lock and update job'
+  }
+}
+
+deployment {
+  environment prod {
+    node cluster {
+      instanceOf jobs.webApp
+      instanceOf jobs.jobService
+      instanceOf jobs.jobQueue
+    }
+  }
+}

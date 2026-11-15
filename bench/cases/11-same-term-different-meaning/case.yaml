@@ -1,0 +1,13 @@
+class: 11. same term, different meaning
+reviewStatus: agent-authored ground truth; NOT reviewed by a human
+description: Alloy 'Hold.holder' (a thread lock, exactly one owner) and TypeSpec 'Hold.holder' (optional customer label) share names but not meaning. Without an approved mapping they must not be unified or reported as contradictory.
+command: [verify, --base-ref, HEAD]
+expected:
+  overallVerdict: CONSISTENT
+  conflicts: []
+  mustNotConflict:
+    - { anchors: ["typespec:field:BookingApi.Hold.holder", "alloy:formal/locks.als#field:Hold.holder"] }
+  mappings:
+    absent:
+      - { type: CORRESPONDS_TO, from: "alloy:formal/locks.als#sig:Hold", to: "typespec:type:BookingApi.Hold" }
+      - { type: CORRESPONDS_TO, from: "alloy:formal/locks.als#field:Hold.holder", to: "typespec:field:BookingApi.Hold.holder" }

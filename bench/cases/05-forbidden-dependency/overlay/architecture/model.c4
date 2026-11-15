@@ -1,0 +1,56 @@
+specification {
+  element actor
+  element system
+  element component
+  element database
+  deploymentNode environment
+  deploymentNode node
+}
+
+model {
+  customer = actor 'Customer'
+
+  booking = system 'Booking Platform' {
+    webApp = component 'Web App' {
+      technology 'TypeScript'
+    }
+    bookingService = component 'Booking Service' {
+      technology 'Kotlin'
+      metadata {
+        specbridge_provides 'BookingApi.Reservations'
+      }
+    }
+    seatInventory = database 'Seat Inventory' {
+      technology 'PostgreSQL'
+    }
+    paymentGateway = component 'Payment Gateway' {
+      technology 'External PSP adapter'
+    }
+
+    webApp -> bookingService 'holds and confirms seats' {
+      metadata {
+        specbridge_operations 'BookingApi.Reservations.holdSeat, BookingApi.Reservations.confirm'
+      }
+    }
+    bookingService -> seatInventory 'locks seats'
+    webApp -> seatInventory 'reads seat map directly'
+    bookingService -> paymentGateway 'charges cards'
+  }
+
+  customer -> booking.webApp 'books seats'
+}
+
+views {
+  view index {
+    include *
+  }
+}
+
+deployment {
+  environment prod {
+    node k8s {
+      instanceOf booking.webApp
+      instanceOf booking.bookingService
+    }
+  }
+}

@@ -1,0 +1,9 @@
+class: 5. forbidden service-to-service dependency
+reviewStatus: agent-authored ground truth; NOT reviewed by a human
+description: LikeC4 adds webApp -> seatInventory, forbidden by the OpenSpec architecture requirement and by the Alloy InventoryIsolation assertion (checked on the projection).
+command: [verify, --base-ref, HEAD]
+expected:
+  overallVerdict: CONFLICT
+  conflicts:
+    - { defect: forbidden-relation, rules: [XS-FORBIDDEN-DEPENDENCY], anchors: ["DEPENDS_ON:likec4:booking.webApp->likec4:booking.seatInventory"] }
+    - { defect: invariant-violated-by-architecture, rules: [AI-PROJECTION-COUNTEREXAMPLE, RI-COUNTEREXAMPLE], anchors: ["projection:architecture:InventoryIsolation", "alloy:formal/architecture.als#assert:InventoryIsolation"], traceRequirement: "openspec:booking-architecture/inventory-isolation" }

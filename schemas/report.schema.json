@@ -1,0 +1,517 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://specbridge.local/schemas/report.schema.json",
+ "title": "SpecBridge report",
+ "description": "Stable JSON contract of `specbridge analyze|verify --format json` (schemaVersion 1.x). Execution status and semantic verdict are separate fields.",
+ "type": "object",
+ "required": [
+  "schemaVersion",
+  "generator",
+  "command",
+  "mode",
+  "generatedAt",
+  "workspace",
+  "git",
+  "change",
+  "baseline",
+  "inputs",
+  "model",
+  "analysis",
+  "verification",
+  "impact",
+  "coverage",
+  "aiUsage",
+  "overall",
+  "limitations"
+ ],
+ "$defs": {
+  "location": {
+   "type": "object",
+   "required": [
+    "file"
+   ],
+   "properties": {
+    "file": {
+     "type": "string"
+    },
+    "line": {
+     "type": "integer",
+     "minimum": 0
+    },
+    "column": {
+     "type": "integer"
+    },
+    "endLine": {
+     "type": "integer"
+    },
+    "endColumn": {
+     "type": "integer"
+    },
+    "locatedBy": {
+     "enum": [
+      "tool",
+      "source-locator"
+     ]
+    }
+   }
+  },
+  "evidence": {
+   "type": "object",
+   "required": [
+    "kind",
+    "detail"
+   ],
+   "properties": {
+    "kind": {
+     "enum": [
+      "source",
+      "tool-output",
+      "mapping",
+      "rule",
+      "execution",
+      "proposal"
+     ]
+    },
+    "detail": {
+     "type": "string"
+    },
+    "location": {
+     "$ref": "#/$defs/location"
+    },
+    "rule": {
+     "type": "string"
+    },
+    "reproduce": {
+     "type": "string"
+    }
+   }
+  },
+  "status": {
+   "enum": [
+    "PASS",
+    "FAIL",
+    "SKIP",
+    "ERROR"
+   ]
+  },
+  "verdict": {
+   "enum": [
+    "CONSISTENT",
+    "CONFLICT",
+    "UNKNOWN",
+    "NOT_APPLICABLE"
+   ]
+  },
+  "coverage": {
+   "type": "object",
+   "required": [
+    "covered",
+    "total",
+    "ratio",
+    "uncovered",
+    "definition"
+   ],
+   "properties": {
+    "covered": {
+     "type": "integer"
+    },
+    "total": {
+     "type": "integer"
+    },
+    "ratio": {
+     "type": [
+      "number",
+      "null"
+     ],
+     "minimum": 0,
+     "maximum": 1
+    },
+    "uncovered": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "definition": {
+     "type": "string"
+    }
+   }
+  },
+  "finding": {
+   "type": "object",
+   "required": [
+    "id",
+    "rule",
+    "family",
+    "status",
+    "verdict",
+    "category",
+    "message",
+    "subjects",
+    "tools",
+    "evidence",
+    "reproduce"
+   ],
+   "properties": {
+    "id": {
+     "type": "string",
+     "pattern": "^F-[0-9a-f]{16}$"
+    },
+    "rule": {
+     "type": "string"
+    },
+    "family": {
+     "enum": [
+      "architecture-api",
+      "requirement-contract",
+      "architecture-invariant",
+      "requirement-invariant",
+      "cross-spec",
+      "requirement-architecture",
+      "mapping",
+      "tool",
+      "api-compatibility",
+      "formal"
+     ]
+    },
+    "status": {
+     "$ref": "#/$defs/status"
+    },
+    "verdict": {
+     "$ref": "#/$defs/verdict"
+    },
+    "category": {
+     "type": "string"
+    },
+    "message": {
+     "type": "string"
+    },
+    "subjects": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "constraints": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "tools": {
+     "type": "array",
+     "items": {
+      "enum": [
+       "openspec",
+       "likec4",
+       "typespec",
+       "alloy",
+       "oasdiff",
+       "specbridge"
+      ]
+     }
+    },
+    "path": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "from",
+       "relation",
+       "to",
+       "trust",
+       "rule"
+      ]
+     }
+    },
+    "evidence": {
+     "type": "array",
+     "items": {
+      "$ref": "#/$defs/evidence"
+     }
+    },
+    "reproduce": {
+     "type": "string"
+    },
+    "details": {
+     "type": "object"
+    }
+   }
+  }
+ },
+ "properties": {
+  "schemaVersion": {
+   "type": "string",
+   "pattern": "^1\\."
+  },
+  "generator": {
+   "type": "object",
+   "required": [
+    "name",
+    "version",
+    "toolVersions"
+   ]
+  },
+  "command": {
+   "type": "string"
+  },
+  "mode": {
+   "enum": [
+    "analysis",
+    "verification"
+   ]
+  },
+  "inputs": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "tool",
+     "version",
+     "status",
+     "interface",
+     "files",
+     "errors",
+     "warnings",
+     "lossy"
+    ]
+   }
+  },
+  "analysis": {
+   "type": "object",
+   "required": [
+    "findings",
+    "counts"
+   ],
+   "properties": {
+    "findings": {
+     "type": "array",
+     "items": {
+      "$ref": "#/$defs/finding"
+     }
+    },
+    "introducedByChange": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "verification": {
+   "type": "object",
+   "required": [
+    "executed",
+    "checks",
+    "formal",
+    "apiCompatibility"
+   ],
+   "properties": {
+    "executed": {
+     "type": "boolean"
+    },
+    "checks": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "id",
+       "kind",
+       "tool",
+       "status",
+       "verdict",
+       "detail"
+      ],
+      "properties": {
+       "kind": {
+        "enum": [
+         "tool-validation",
+         "formal",
+         "projection",
+         "api-compatibility"
+        ]
+       },
+       "status": {
+        "$ref": "#/$defs/status"
+       },
+       "verdict": {
+        "$ref": "#/$defs/verdict"
+       }
+      }
+     }
+    },
+    "formal": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "runs": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "required": [
+         "kind",
+         "model",
+         "modelSha256",
+         "status",
+         "results"
+        ],
+        "properties": {
+         "results": {
+          "type": "array",
+          "items": {
+           "type": "object",
+           "required": [
+            "commandId",
+            "check",
+            "text",
+            "scopes",
+            "outcome",
+            "reproduce",
+            "boundedNote"
+           ],
+           "properties": {
+            "outcome": {
+             "enum": [
+              "COUNTEREXAMPLE",
+              "NO_COUNTEREXAMPLE_IN_SCOPE",
+              "INSTANCE_FOUND",
+              "NO_INSTANCE_IN_SCOPE",
+              "ERROR"
+             ]
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    },
+    "apiCompatibility": {
+     "type": [
+      "object",
+      "null"
+     ]
+    }
+   }
+  },
+  "impact": {
+   "type": [
+    "object",
+    "null"
+   ],
+   "required": [
+    "seeds",
+    "impacted",
+    "invalidatedMappings",
+    "revalidation",
+    "warnings",
+    "complete"
+   ],
+   "properties": {
+    "impacted": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "entity",
+       "depth",
+       "kind",
+       "path",
+       "graph"
+      ],
+      "properties": {
+       "kind": {
+        "enum": [
+         "direct",
+         "indirect"
+        ]
+       }
+      }
+     }
+    },
+    "complete": {
+     "type": "boolean"
+    }
+   }
+  },
+  "coverage": {
+   "type": [
+    "object",
+    "null"
+   ],
+   "required": [
+    "requirementTraceability",
+    "apiContractLinkage",
+    "architectureLinkage",
+    "invariantVerification",
+    "executedVerification"
+   ],
+   "properties": {
+    "requirementTraceability": {
+     "$ref": "#/$defs/coverage"
+    },
+    "apiContractLinkage": {
+     "$ref": "#/$defs/coverage"
+    },
+    "architectureLinkage": {
+     "$ref": "#/$defs/coverage"
+    },
+    "invariantVerification": {
+     "$ref": "#/$defs/coverage"
+    },
+    "executedVerification": {
+     "$ref": "#/$defs/coverage"
+    }
+   }
+  },
+  "aiUsage": {
+   "type": "object",
+   "required": [
+    "provider",
+    "calls",
+    "tokens",
+    "note"
+   ]
+  },
+  "overall": {
+   "type": "object",
+   "required": [
+    "status",
+    "verdict",
+    "exitCode",
+    "reasons"
+   ],
+   "properties": {
+    "status": {
+     "$ref": "#/$defs/status"
+    },
+    "verdict": {
+     "$ref": "#/$defs/verdict"
+    },
+    "exitCode": {
+     "enum": [
+      0,
+      1,
+      2,
+      3
+     ]
+    },
+    "reasons": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "limitations": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  }
+ }
+}

@@ -1,0 +1,9 @@
+class: 3. architecture vs API ownership mismatch
+reviewStatus: agent-authored ground truth; NOT reviewed by a human
+description: Payment Gateway also claims to provide holdSeat (LikeC4 metadata), contradicting the single-provider policy and the ownership requirement.
+command: [verify, --base-ref, HEAD]
+expected:
+  overallVerdict: CONFLICT
+  conflicts:
+    - { defect: two-providers, rules: [AA-PROVIDER-CONFLICT], anchors: ["typespec:op:BookingApi.Reservations.holdSeat"] }
+    - { defect: ownership-requirement, rules: [XS-OWNERSHIP], anchors: ["typespec:op:BookingApi.Reservations.holdSeat"] }

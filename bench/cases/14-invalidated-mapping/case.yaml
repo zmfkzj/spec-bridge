@@ -1,0 +1,14 @@
+class: 14. mapping invalidated by a change
+reviewStatus: agent-authored ground truth; NOT reviewed by a human
+description: The requirement "Single seat hold" is renamed to "Exclusive seat hold". Approved VERIFIES mappings and the TypeSpec x-specbridge-requirements reference now point to the old identity.
+command: [verify, --base-ref, HEAD]
+expected:
+  overallVerdict: CONFLICT
+  conflicts:
+    - { defect: mapping-1-invalidated, rules: [MAP-DANGLING], anchors: ["map-verifies-tv5aeg"] }
+    - { defect: mapping-2-invalidated, rules: [MAP-DANGLING], anchors: ["map-verifies-27qk9r"] }
+    - { defect: stale-contract-reference, rules: [REF-DANGLING], anchors: ["seat-hold/single-seat-hold"] }
+  unknowns:
+    - { rules: [RI-NOT-LINKED], anchors: ["openspec:seat-hold/exclusive-seat-hold"] }
+  impact:
+    invalidatedMappings: [map-verifies-tv5aeg, map-verifies-27qk9r]

@@ -1,0 +1,18 @@
+# SpecBridge workspace configuration (paths are workspace-relative).
+openspec: { root: . }
+likec4: { root: architecture }
+typespec: { main: api/main.tsp }
+alloy:
+  models: [formal/jobs.als, formal/architecture.als]
+mappings: specbridge/mappings.yaml
+policies:
+  singleProvider: true
+  impactMaxDepth: 4
+alloyProjections:
+  - id: architecture
+    model: formal/architecture.als
+    sig: Component
+    relation: deps
+    elementKinds: [component, database]
+    atoms: { WebApp: jobs.webApp, JobQueue: jobs.jobQueue }
+    assertions: [QueueIsolation, NoCycles]

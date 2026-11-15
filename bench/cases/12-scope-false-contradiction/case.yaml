@@ -1,0 +1,12 @@
+class: 12. false contradiction from differing scope/state
+reviewStatus: agent-authored ground truth; NOT reviewed by a human
+description: releasedAt is required only in state released (contract cannot express state); priceCents is required "in request" but Hold is a response-only model. Neither is a confirmed contradiction.
+command: [verify, --base-ref, HEAD]
+expected:
+  overallVerdict: UNKNOWN
+  conflicts: []
+  unknowns:
+    - { rules: [RC-REQUIRED-OPTIONAL], anchors: ["typespec:field:BookingApi.Hold.releasedAt"], category: STATE_DIFFERS }
+  mustNotConflict:
+    - { anchors: ["typespec:field:BookingApi.Hold.releasedAt"] }
+    - { anchors: ["typespec:field:BookingApi.Hold.priceCents"] }

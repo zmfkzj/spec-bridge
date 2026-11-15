@@ -1,0 +1,16 @@
+openspec: { root: . }
+likec4: { root: architecture }
+typespec: { main: api/main.tsp }
+alloy:
+  models: [formal/booking.als, formal/architecture.als, formal/locks.als]
+mappings: specbridge/mappings.yaml
+policies:
+  singleProvider: true
+alloyProjections:
+  - id: architecture
+    model: formal/architecture.als
+    sig: Component
+    relation: deps
+    elementKinds: [component, database]
+    atoms: { WebApp: booking.webApp, SeatInventory: booking.seatInventory }
+    assertions: [InventoryIsolation, NoCycles]

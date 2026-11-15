@@ -1,0 +1,9 @@
+node_modules/
+# Downloaded/compiled external tools (scripts/setup-tools.sh recreates them)
+tools/oasdiff
+tools/*.jar
+tools/java-build/
+# SpecBridge derived data (regenerable from specs + approved mappings)
+.specbridge/
+**/.specbridge/
+.work/

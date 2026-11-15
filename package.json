@@ -1,0 +1,38 @@
+{
+  "name": "specbridge",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SpecBridge Semantic Design Engine: semantic integration of OpenSpec, LikeC4, TypeSpec, oasdiff and Alloy",
+  "type": "module",
+  "bin": {
+    "specbridge": "./bin/specbridge.mjs"
+  },
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "setup-tools": "bash scripts/setup-tools.sh",
+    "typecheck": "tsc -p .",
+    "test": "node --test --test-concurrency=4 test/*.test.ts",
+    "test:unit": "node --test test/constraints.test.ts test/engine.test.ts test/ir.test.ts test/cli.test.ts test/draft.test.ts",
+    "scenarios": "node scripts/run-scenarios.ts",
+    "bench": "node bench/run.ts && node bench/check.ts",
+    "poc": "node scripts/phase0-poc.mjs",
+    "specbridge": "node bin/specbridge.mjs"
+  },
+  "dependencies": {
+    "@fission-ai/openspec": "2.0.0",
+    "@typespec/compiler": "1.18.0",
+    "@typespec/http": "1.18.0",
+    "@typespec/openapi": "1.18.0",
+    "@typespec/openapi3": "1.18.0",
+    "@typespec/rest": "0.88.0",
+    "likec4": "1.61.0",
+    "yaml": "2.9.1"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.6",
+    "ajv": "8.20.0",
+    "typescript": "7.0.2"
+  }
+}

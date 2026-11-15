@@ -1,0 +1,9 @@
+class: 15. no false PASS for unverified areas
+reviewStatus: agent-authored ground truth; NOT reviewed by a human
+description: The check command of HeldHasHolder is deleted and no API baseline is given; everything that did run is clean, but the result must not be reported as CONSISTENT/PASS.
+command: [verify]
+expected:
+  overallVerdict: UNKNOWN
+  conflicts: []
+  unknowns:
+    - { rules: [RI-NOT-EXECUTABLE], anchors: ["alloy:formal/booking.als#assert:HeldHasHolder"] }

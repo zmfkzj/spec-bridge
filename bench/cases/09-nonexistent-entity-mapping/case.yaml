@@ -1,0 +1,8 @@
+class: 9. mapping to a non-existent entity
+reviewStatus: agent-authored ground truth; NOT reviewed by a human
+description: An approved mapping references assertion NoOverbooking, which does not exist in the Alloy model.
+command: [verify, --base-ref, HEAD]
+expected:
+  overallVerdict: CONFLICT
+  conflicts:
+    - { defect: ghost-mapping, rules: [MAP-DANGLING], anchors: ["map-verifies-ghost"] }

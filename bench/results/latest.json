@@ -1,0 +1,2942 @@
+{
+ "summary": {
+  "generatedAt": "2026-11-15T09:03:09.251Z",
+  "groundTruth": "agent-authored by the implementing agent; NOT reviewed by a human (no human review occurred)",
+  "environment": {
+   "node": "v24.21.0",
+   "platform": "linux"
+  },
+  "configurations": {
+   "A": {
+    "cases": 15,
+    "tp": 3,
+    "fp": 0,
+    "fn": 11,
+    "negatives": 4,
+    "tnOnNegatives": 4,
+    "precision": 1,
+    "recall": 0.214,
+    "falsePositiveRate": 0,
+    "falseNegativeRate": 0.786,
+    "overallVerdictAccuracy": 0.333,
+    "falsePass": 10,
+    "unknownRecall": 0,
+    "mappingAccuracy": 0.444,
+    "requirementTraceOfDetectedDefects": 0,
+    "impactExpectationsMet": 0,
+    "latencyMs": {
+     "mean": 1206,
+     "p50": 1163,
+     "max": 1801
+    }
+   },
+   "B": {
+    "cases": 15,
+    "tp": 9,
+    "fp": 0,
+    "fn": 5,
+    "negatives": 4,
+    "tnOnNegatives": 4,
+    "precision": 1,
+    "recall": 0.643,
+    "falsePositiveRate": 0,
+    "falseNegativeRate": 0.357,
+    "overallVerdictAccuracy": 0.6,
+    "falsePass": 6,
+    "unknownRecall": 0,
+    "mappingAccuracy": 0.778,
+    "requirementTraceOfDetectedDefects": 0,
+    "impactExpectationsMet": 0,
+    "latencyMs": {
+     "mean": 2515,
+     "p50": 2459,
+     "max": 3144
+    }
+   },
+   "C": {
+    "cases": 15,
+    "tp": 14,
+    "fp": 0,
+    "fn": 0,
+    "negatives": 4,
+    "tnOnNegatives": 4,
+    "precision": 1,
+    "recall": 1,
+    "falsePositiveRate": 0,
+    "falseNegativeRate": 0,
+    "overallVerdictAccuracy": 1,
+    "falsePass": 0,
+    "unknownRecall": 1,
+    "mappingAccuracy": 1,
+    "requirementTraceOfDetectedDefects": 1,
+    "impactExpectationsMet": 1,
+    "latencyMs": {
+     "mean": 4560,
+     "p50": 4647,
+     "max": 5088
+    }
+   },
+   "D": {
+    "status": "UNSUPPORTED / NOT MEASURED",
+    "reason": "no AI provider is configured in this environment; SPECBRIDGE_AI_COMMAND boundary exists but no model was called"
+   },
+   "Dprime_heuristic_auto_accept": {
+    "cases": 15,
+    "tp": 14,
+    "fp": 0,
+    "fn": 0,
+    "negatives": 4,
+    "tnOnNegatives": 4,
+    "precision": 1,
+    "recall": 1,
+    "falsePositiveRate": 0,
+    "falseNegativeRate": 0,
+    "overallVerdictAccuracy": 0.933,
+    "falsePass": 0,
+    "unknownRecall": 1,
+    "mappingAccuracy": 0.778,
+    "requirementTraceOfDetectedDefects": 1,
+    "impactExpectationsMet": 1,
+    "latencyMs": {
+     "mean": 4567,
+     "p50": 4649,
+     "max": 5036
+    }
+   }
+  },
+  "reproducibility": {
+   "casesIdenticalAcrossTwoRuns": 15,
+   "cases": 15
+  },
+  "tokens": {
+   "A": 0,
+   "B": 0,
+   "C": 0,
+   "Dprime": 0,
+   "D": "not measured (no provider)",
+   "note": "no AI calls were made by A/B/C/Dprime; the case-10 stub fixture is a shell script, not a model"
+  },
+  "cost": "no paid services used; cost = local CPU time only (see latencyMs)"
+ },
+ "results": [
+  {
+   "case": "01-consistent",
+   "class": "1. all specifications consistent",
+   "reviewStatus": "agent-authored ground truth; NOT reviewed by a human",
+   "command": [
+    "verify",
+    "--base-ref",
+    "HEAD"
+   ],
+   "A": {
+    "overall": {
+     "expected": "CONSISTENT",
+     "reported": "CONSISTENT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [],
+    "mappings": [
+     {
+      "link": "VERIFIES|alloy:formal/booking.als#assert:SingleHolder|openspec:seat-hold/single-seat-hold",
+      "expected": true,
+      "ok": false
+     },
+     {
+      "link": "REQUIRES|openspec:seat-hold/single-seat-hold|typespec:op:BookingApi.Reservations.holdSeat",
+      "expected": true,
+      "ok": false
+     },
+     {
+      "link": "EXPOSES|likec4:booking.bookingService|typespec:op:BookingApi.Reservations.holdSeat",
+      "expected": true,
+      "ok": false
+     },
+     {
+      "link": "CONSUMES|likec4:booking.webApp|typespec:op:BookingApi.Reservations.holdSeat",
+      "expected": true,
+      "ok": false
+     },
+     {
+      "link": "SATISFIES|typespec:op:BookingApi.Reservations.holdSeat|openspec:seat-hold/hold-duration",
+      "expected": true,
+      "ok": false
+     }
+    ],
+    "impact": null,
+    "ms": 1801
+   },
+   "B": {
+    "overall": {
+     "expected": "CONSISTENT",
+     "reported": "CONSISTENT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [],
+    "mappings": [
+     {
+      "link": "VERIFIES|alloy:formal/booking.als#assert:SingleHolder|openspec:seat-hold/single-seat-hold",
+      "expected": true,
+      "ok": true
+     },
+     {
+      "link": "REQUIRES|openspec:seat-hold/single-seat-hold|typespec:op:BookingApi.Reservations.holdSeat",
+      "expected": true,
+      "ok": false
+     },
+     {
+      "link": "EXPOSES|likec4:booking.bookingService|typespec:op:BookingApi.Reservations.holdSeat",
+      "expected": true,
+      "ok": false
+     },
+     {
+      "link": "CONSUMES|likec4:booking.webApp|typespec:op:BookingApi.Reservations.holdSeat",
+      "expected": true,
+      "ok": true
+     },
+     {
+      "link": "SATISFIES|typespec:op:BookingApi.Reservations.holdSeat|openspec:seat-hold/hold-duration",
+      "expected": true,
+      "ok": true
+     }
+    ],
+    "impact": null,
+    "ms": 3144
+   },
+   "C": {
+    "overall": {
+     "expected": "CONSISTENT",
+     "reported": "CONSISTENT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [],
+    "mappings": [
+     {
+      "link": "VERIFIES|alloy:formal/booking.als#assert:SingleHolder|openspec:seat-hold/single-seat-hold",
+      "expected": true,
+      "ok": true
+     },
+     {
+      "link": "REQUIRES|openspec:seat-hold/single-seat-hold|typespec:op:BookingApi.Reservations.holdSeat",
+      "expected": true,
+      "ok": true
+     },
+     {
+      "link": "EXPOSES|likec4:booking.bookingService|typespec:op:BookingApi.Reservations.holdSeat",
+      "expected": true,
+      "ok": true
+     },
+     {
+      "link": "CONSUMES|likec4:booking.webApp|typespec:op:BookingApi.Reservations.holdSeat",
+      "expected": true,
+      "ok": true
+     },
+     {
+      "link": "SATISFIES|typespec:op:BookingApi.Reservations.holdSeat|openspec:seat-hold/hold-duration",
+      "expected": true,
+      "ok": true
+     }
+    ],
+    "impact": null,
+    "ms": 4615
+   },
+   "Dprime": {
+    "overall": {
+     "expected": "CONSISTENT",
+     "reported": "CONSISTENT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [],
+    "mappings": [
+     {
+      "link": "VERIFIES|alloy:formal/booking.als#assert:SingleHolder|openspec:seat-hold/single-seat-hold",
+      "expected": true,
+      "ok": true
+     },
+     {
+      "link": "REQUIRES|openspec:seat-hold/single-seat-hold|typespec:op:BookingApi.Reservations.holdSeat",
+      "expected": true,
+      "ok": true
+     },
+     {
+      "link": "EXPOSES|likec4:booking.bookingService|typespec:op:BookingApi.Reservations.holdSeat",
+      "expected": true,
+      "ok": true
+     },
+     {
+      "link": "CONSUMES|likec4:booking.webApp|typespec:op:BookingApi.Reservations.holdSeat",
+      "expected": true,
+      "ok": true
+     },
+     {
+      "link": "SATISFIES|typespec:op:BookingApi.Reservations.holdSeat|openspec:seat-hold/hold-duration",
+      "expected": true,
+      "ok": true
+     }
+    ],
+    "impact": null,
+    "ms": 4657,
+    "acceptedHeuristicLinks": 0
+   },
+   "reproducible": true,
+   "hashes": [
+    "eb6dd24438bc4b38",
+    "eb6dd24438bc4b38"
+   ],
+   "exitCode": 0,
+   "status": "PASS",
+   "coverage": {
+    "requirementTraceability": {
+     "covered": 4,
+     "total": 4,
+     "ratio": 1
+    },
+    "apiContractLinkage": {
+     "covered": 2,
+     "total": 2,
+     "ratio": 1
+    },
+    "architectureLinkage": {
+     "covered": 2,
+     "total": 4,
+     "ratio": 0.5
+    },
+    "invariantVerification": {
+     "covered": 1,
+     "total": 1,
+     "ratio": 1
+    },
+    "executedVerification": {
+     "covered": 5,
+     "total": 5,
+     "ratio": 1
+    }
+   },
+   "aiUsage": {
+    "provider": null,
+    "calls": 0,
+    "tokens": null,
+    "note": "no AI provider configured; no AI calls were made"
+   }
+  },
+  {
+   "case": "02-required-field-conflict",
+   "class": "2. requirement vs API required-field conflict",
+   "reviewStatus": "agent-authored ground truth; NOT reviewed by a human",
+   "command": [
+    "verify",
+    "--base-ref",
+    "HEAD"
+   ],
+   "A": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONSISTENT",
+     "ok": false,
+     "falsePass": true
+    },
+    "tp": 0,
+    "fn": 1,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "customerId-optional",
+      "detected": false,
+      "by": null,
+      "traced": null
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": null,
+    "ms": 1172
+   },
+   "B": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONSISTENT",
+     "ok": false,
+     "falsePass": true
+    },
+    "tp": 0,
+    "fn": 1,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "customerId-optional",
+      "detected": false,
+      "by": null,
+      "traced": null
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": null,
+    "ms": 2459
+   },
+   "C": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONFLICT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 1,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "customerId-optional",
+      "detected": true,
+      "by": "RC-REQUIRED-OPTIONAL",
+      "traced": null
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": null,
+    "ms": 4646
+   },
+   "Dprime": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONFLICT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 1,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "customerId-optional",
+      "detected": true,
+      "by": "RC-REQUIRED-OPTIONAL",
+      "traced": null
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": null,
+    "ms": 4649,
+    "acceptedHeuristicLinks": 0
+   },
+   "reproducible": true,
+   "hashes": [
+    "f639c59e39fd133e",
+    "f639c59e39fd133e"
+   ],
+   "exitCode": 1,
+   "status": "FAIL",
+   "coverage": {
+    "requirementTraceability": {
+     "covered": 4,
+     "total": 4,
+     "ratio": 1
+    },
+    "apiContractLinkage": {
+     "covered": 2,
+     "total": 2,
+     "ratio": 1
+    },
+    "architectureLinkage": {
+     "covered": 2,
+     "total": 4,
+     "ratio": 0.5
+    },
+    "invariantVerification": {
+     "covered": 1,
+     "total": 1,
+     "ratio": 1
+    },
+    "executedVerification": {
+     "covered": 5,
+     "total": 5,
+     "ratio": 1
+    }
+   },
+   "aiUsage": {
+    "provider": null,
+    "calls": 0,
+    "tokens": null,
+    "note": "no AI provider configured; no AI calls were made"
+   }
+  },
+  {
+   "case": "03-ownership-mismatch",
+   "class": "3. architecture vs API ownership mismatch",
+   "reviewStatus": "agent-authored ground truth; NOT reviewed by a human",
+   "command": [
+    "verify",
+    "--base-ref",
+    "HEAD"
+   ],
+   "A": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONSISTENT",
+     "ok": false,
+     "falsePass": true
+    },
+    "tp": 0,
+    "fn": 2,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "two-providers",
+      "detected": false,
+      "by": null,
+      "traced": null
+     },
+     {
+      "defect": "ownership-requirement",
+      "detected": false,
+      "by": null,
+      "traced": null
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": null,
+    "ms": 1167
+   },
+   "B": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONSISTENT",
+     "ok": false,
+     "falsePass": true
+    },
+    "tp": 0,
+    "fn": 2,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "two-providers",
+      "detected": false,
+      "by": null,
+      "traced": null
+     },
+     {
+      "defect": "ownership-requirement",
+      "detected": false,
+      "by": null,
+      "traced": null
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": null,
+    "ms": 2479
+   },
+   "C": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONFLICT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 2,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "two-providers",
+      "detected": true,
+      "by": "AA-PROVIDER-CONFLICT",
+      "traced": null
+     },
+     {
+      "defect": "ownership-requirement",
+      "detected": true,
+      "by": "XS-OWNERSHIP",
+      "traced": null
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": null,
+    "ms": 4686
+   },
+   "Dprime": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONFLICT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 2,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "two-providers",
+      "detected": true,
+      "by": "AA-PROVIDER-CONFLICT",
+      "traced": null
+     },
+     {
+      "defect": "ownership-requirement",
+      "detected": true,
+      "by": "XS-OWNERSHIP",
+      "traced": null
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": null,
+    "ms": 4646,
+    "acceptedHeuristicLinks": 0
+   },
+   "reproducible": true,
+   "hashes": [
+    "4e5be6769864c460",
+    "4e5be6769864c460"
+   ],
+   "exitCode": 1,
+   "status": "FAIL",
+   "coverage": {
+    "requirementTraceability": {
+     "covered": 4,
+     "total": 4,
+     "ratio": 1
+    },
+    "apiContractLinkage": {
+     "covered": 2,
+     "total": 2,
+     "ratio": 1
+    },
+    "architectureLinkage": {
+     "covered": 3,
+     "total": 4,
+     "ratio": 0.75
+    },
+    "invariantVerification": {
+     "covered": 1,
+     "total": 1,
+     "ratio": 1
+    },
+    "executedVerification": {
+     "covered": 5,
+     "total": 5,
+     "ratio": 1
+    }
+   },
+   "aiUsage": {
+    "provider": null,
+    "calls": 0,
+    "tokens": null,
+    "note": "no AI provider configured; no AI calls were made"
+   }
+  },
+  {
+   "case": "04-missing-operation-ref",
+   "class": "4. reference to a missing API operation",
+   "reviewStatus": "agent-authored ground truth; NOT reviewed by a human",
+   "command": [
+    "verify",
+    "--base-ref",
+    "HEAD"
+   ],
+   "A": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONSISTENT",
+     "ok": false,
+     "falsePass": true
+    },
+    "tp": 0,
+    "fn": 2,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "requirement-missing-op",
+      "detected": false,
+      "by": null,
+      "traced": null
+     },
+     {
+      "defect": "architecture-missing-op",
+      "detected": false,
+      "by": null,
+      "traced": null
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": null,
+    "ms": 1161
+   },
+   "B": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONFLICT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 2,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "requirement-missing-op",
+      "detected": true,
+      "by": "RC-MISSING-OPERATION",
+      "traced": null
+     },
+     {
+      "defect": "architecture-missing-op",
+      "detected": true,
+      "by": "AA-DANGLING-OPERATION",
+      "traced": null
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": null,
+    "ms": 2460
+   },
+   "C": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONFLICT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 2,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "requirement-missing-op",
+      "detected": true,
+      "by": "RC-MISSING-OPERATION",
+      "traced": null
+     },
+     {
+      "defect": "architecture-missing-op",
+      "detected": true,
+      "by": "AA-DANGLING-OPERATION",
+      "traced": null
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": null,
+    "ms": 4643
+   },
+   "Dprime": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONFLICT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 2,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "requirement-missing-op",
+      "detected": true,
+      "by": "RC-MISSING-OPERATION",
+      "traced": null
+     },
+     {
+      "defect": "architecture-missing-op",
+      "detected": true,
+      "by": "AA-DANGLING-OPERATION",
+      "traced": null
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": null,
+    "ms": 4633,
+    "acceptedHeuristicLinks": 0
+   },
+   "reproducible": true,
+   "hashes": [
+    "d2bde9e79dc05d52",
+    "d2bde9e79dc05d52"
+   ],
+   "exitCode": 1,
+   "status": "FAIL",
+   "coverage": {
+    "requirementTraceability": {
+     "covered": 4,
+     "total": 4,
+     "ratio": 1
+    },
+    "apiContractLinkage": {
+     "covered": 2,
+     "total": 2,
+     "ratio": 1
+    },
+    "architectureLinkage": {
+     "covered": 2,
+     "total": 4,
+     "ratio": 0.5
+    },
+    "invariantVerification": {
+     "covered": 1,
+     "total": 1,
+     "ratio": 1
+    },
+    "executedVerification": {
+     "covered": 5,
+     "total": 5,
+     "ratio": 1
+    }
+   },
+   "aiUsage": {
+    "provider": null,
+    "calls": 0,
+    "tokens": null,
+    "note": "no AI provider configured; no AI calls were made"
+   }
+  },
+  {
+   "case": "05-forbidden-dependency",
+   "class": "5. forbidden service-to-service dependency",
+   "reviewStatus": "agent-authored ground truth; NOT reviewed by a human",
+   "command": [
+    "verify",
+    "--base-ref",
+    "HEAD"
+   ],
+   "A": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONSISTENT",
+     "ok": false,
+     "falsePass": true
+    },
+    "tp": 0,
+    "fn": 2,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "forbidden-relation",
+      "detected": false,
+      "by": null,
+      "traced": null
+     },
+     {
+      "defect": "invariant-violated-by-architecture",
+      "detected": false,
+      "by": null,
+      "traced": false
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": null,
+    "ms": 1177
+   },
+   "B": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONSISTENT",
+     "ok": false,
+     "falsePass": true
+    },
+    "tp": 0,
+    "fn": 2,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "forbidden-relation",
+      "detected": false,
+      "by": null,
+      "traced": null
+     },
+     {
+      "defect": "invariant-violated-by-architecture",
+      "detected": false,
+      "by": null,
+      "traced": false
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": null,
+    "ms": 2468
+   },
+   "C": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONFLICT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 2,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "forbidden-relation",
+      "detected": true,
+      "by": "XS-FORBIDDEN-DEPENDENCY",
+      "traced": null
+     },
+     {
+      "defect": "invariant-violated-by-architecture",
+      "detected": true,
+      "by": "AI-PROJECTION-COUNTEREXAMPLE",
+      "traced": true
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": null,
+    "ms": 4617
+   },
+   "Dprime": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONFLICT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 2,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "forbidden-relation",
+      "detected": true,
+      "by": "XS-FORBIDDEN-DEPENDENCY",
+      "traced": null
+     },
+     {
+      "defect": "invariant-violated-by-architecture",
+      "detected": true,
+      "by": "AI-PROJECTION-COUNTEREXAMPLE",
+      "traced": true
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": null,
+    "ms": 4722,
+    "acceptedHeuristicLinks": 0
+   },
+   "reproducible": true,
+   "hashes": [
+    "4cc04214dbc3799d",
+    "4cc04214dbc3799d"
+   ],
+   "exitCode": 1,
+   "status": "FAIL",
+   "coverage": {
+    "requirementTraceability": {
+     "covered": 4,
+     "total": 4,
+     "ratio": 1
+    },
+    "apiContractLinkage": {
+     "covered": 2,
+     "total": 2,
+     "ratio": 1
+    },
+    "architectureLinkage": {
+     "covered": 2,
+     "total": 4,
+     "ratio": 0.5
+    },
+    "invariantVerification": {
+     "covered": 1,
+     "total": 1,
+     "ratio": 1
+    },
+    "executedVerification": {
+     "covered": 5,
+     "total": 5,
+     "ratio": 1
+    }
+   },
+   "aiUsage": {
+    "provider": null,
+    "calls": 0,
+    "tokens": null,
+    "note": "no AI provider configured; no AI calls were made"
+   }
+  },
+  {
+   "case": "06-breaking-change",
+   "class": "6. breaking change of a modified API",
+   "reviewStatus": "agent-authored ground truth; NOT reviewed by a human",
+   "command": [
+    "verify",
+    "--base-ref",
+    "HEAD"
+   ],
+   "A": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONFLICT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 1,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "new-required-request-property",
+      "detected": true,
+      "by": "TOOL-OASDIFF-BREAKING",
+      "traced": false
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": {
+     "mustInclude": [
+      {
+       "id": "likec4:booking.webApp",
+       "ok": false
+      },
+      {
+       "id": "likec4:booking.bookingService",
+       "ok": false
+      },
+      {
+       "id": "openspec:seat-hold/single-seat-hold",
+       "ok": false
+      }
+     ],
+     "invalidatedMappings": []
+    },
+    "ms": 1163
+   },
+   "B": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONFLICT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 1,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "new-required-request-property",
+      "detected": true,
+      "by": "TOOL-OASDIFF-BREAKING",
+      "traced": false
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": {
+     "mustInclude": [
+      {
+       "id": "likec4:booking.webApp",
+       "ok": false
+      },
+      {
+       "id": "likec4:booking.bookingService",
+       "ok": false
+      },
+      {
+       "id": "openspec:seat-hold/single-seat-hold",
+       "ok": false
+      }
+     ],
+     "invalidatedMappings": []
+    },
+    "ms": 2461
+   },
+   "C": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONFLICT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 1,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "new-required-request-property",
+      "detected": true,
+      "by": "API-BREAKING-CHANGE",
+      "traced": true
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": {
+     "mustInclude": [
+      {
+       "id": "likec4:booking.webApp",
+       "ok": true
+      },
+      {
+       "id": "likec4:booking.bookingService",
+       "ok": true
+      },
+      {
+       "id": "openspec:seat-hold/single-seat-hold",
+       "ok": true
+      }
+     ],
+     "invalidatedMappings": []
+    },
+    "ms": 4654
+   },
+   "Dprime": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONFLICT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 1,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "new-required-request-property",
+      "detected": true,
+      "by": "API-BREAKING-CHANGE",
+      "traced": true
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": {
+     "mustInclude": [
+      {
+       "id": "likec4:booking.webApp",
+       "ok": true
+      },
+      {
+       "id": "likec4:booking.bookingService",
+       "ok": true
+      },
+      {
+       "id": "openspec:seat-hold/single-seat-hold",
+       "ok": true
+      }
+     ],
+     "invalidatedMappings": []
+    },
+    "ms": 4658,
+    "acceptedHeuristicLinks": 0
+   },
+   "reproducible": true,
+   "hashes": [
+    "b096943b73a37a31",
+    "b096943b73a37a31"
+   ],
+   "exitCode": 1,
+   "status": "FAIL",
+   "coverage": {
+    "requirementTraceability": {
+     "covered": 4,
+     "total": 4,
+     "ratio": 1
+    },
+    "apiContractLinkage": {
+     "covered": 2,
+     "total": 2,
+     "ratio": 1
+    },
+    "architectureLinkage": {
+     "covered": 2,
+     "total": 4,
+     "ratio": 0.5
+    },
+    "invariantVerification": {
+     "covered": 1,
+     "total": 1,
+     "ratio": 1
+    },
+    "executedVerification": {
+     "covered": 5,
+     "total": 5,
+     "ratio": 1
+    }
+   },
+   "aiUsage": {
+    "provider": null,
+    "calls": 0,
+    "tokens": null,
+    "note": "no AI provider configured; no AI calls were made"
+   }
+  },
+  {
+   "case": "07-alloy-counterexample",
+   "class": "7. Alloy assertion counterexample",
+   "reviewStatus": "agent-authored ground truth; NOT reviewed by a human",
+   "command": [
+    "verify",
+    "--base-ref",
+    "HEAD"
+   ],
+   "A": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONFLICT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 2,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "single-holder-violated",
+      "detected": true,
+      "by": "TOOL-ALLOY-COUNTEREXAMPLE",
+      "traced": false
+     },
+     {
+      "defect": "held-has-holder-violated",
+      "detected": true,
+      "by": "TOOL-ALLOY-COUNTEREXAMPLE",
+      "traced": false
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": null,
+    "ms": 1022
+   },
+   "B": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONFLICT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 2,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "single-holder-violated",
+      "detected": true,
+      "by": "TOOL-ALLOY-COUNTEREXAMPLE",
+      "traced": false
+     },
+     {
+      "defect": "held-has-holder-violated",
+      "detected": true,
+      "by": "TOOL-ALLOY-COUNTEREXAMPLE",
+      "traced": false
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": null,
+    "ms": 2313
+   },
+   "C": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONFLICT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 2,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "single-holder-violated",
+      "detected": true,
+      "by": "RI-COUNTEREXAMPLE",
+      "traced": true
+     },
+     {
+      "defect": "held-has-holder-violated",
+      "detected": true,
+      "by": "RI-COUNTEREXAMPLE",
+      "traced": true
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": null,
+    "ms": 4566
+   },
+   "Dprime": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONFLICT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 2,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "single-holder-violated",
+      "detected": true,
+      "by": "RI-COUNTEREXAMPLE",
+      "traced": true
+     },
+     {
+      "defect": "held-has-holder-violated",
+      "detected": true,
+      "by": "RI-COUNTEREXAMPLE",
+      "traced": true
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": null,
+    "ms": 4535,
+    "acceptedHeuristicLinks": 0
+   },
+   "reproducible": true,
+   "hashes": [
+    "30febac5f4028d87",
+    "30febac5f4028d87"
+   ],
+   "exitCode": 1,
+   "status": "FAIL",
+   "coverage": {
+    "requirementTraceability": {
+     "covered": 4,
+     "total": 4,
+     "ratio": 1
+    },
+    "apiContractLinkage": {
+     "covered": 2,
+     "total": 2,
+     "ratio": 1
+    },
+    "architectureLinkage": {
+     "covered": 2,
+     "total": 4,
+     "ratio": 0.5
+    },
+    "invariantVerification": {
+     "covered": 0,
+     "total": 1,
+     "ratio": 0
+    },
+    "executedVerification": {
+     "covered": 5,
+     "total": 5,
+     "ratio": 1
+    }
+   },
+   "aiUsage": {
+    "provider": null,
+    "calls": 0,
+    "tokens": null,
+    "note": "no AI provider configured; no AI calls were made"
+   }
+  },
+  {
+   "case": "08-core-requirement-unlinked",
+   "class": "8. core requirement not linked to any invariant",
+   "reviewStatus": "agent-authored ground truth; NOT reviewed by a human",
+   "command": [
+    "verify",
+    "--base-ref",
+    "HEAD"
+   ],
+   "A": {
+    "overall": {
+     "expected": "UNKNOWN",
+     "reported": "CONSISTENT",
+     "ok": false,
+     "falsePass": true
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [
+     {
+      "rules": [
+       "RI-NOT-LINKED"
+      ],
+      "anchors": [
+       "openspec:seat-hold/single-seat-hold"
+      ],
+      "reported": false
+     }
+    ],
+    "mappings": [
+     {
+      "link": "VERIFIES|alloy:formal/booking.als#assert:SingleHolder|openspec:seat-hold/single-seat-hold",
+      "expected": false,
+      "ok": true
+     }
+    ],
+    "impact": null,
+    "ms": 1189
+   },
+   "B": {
+    "overall": {
+     "expected": "UNKNOWN",
+     "reported": "CONSISTENT",
+     "ok": false,
+     "falsePass": true
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [
+     {
+      "rules": [
+       "RI-NOT-LINKED"
+      ],
+      "anchors": [
+       "openspec:seat-hold/single-seat-hold"
+      ],
+      "reported": false
+     }
+    ],
+    "mappings": [
+     {
+      "link": "VERIFIES|alloy:formal/booking.als#assert:SingleHolder|openspec:seat-hold/single-seat-hold",
+      "expected": false,
+      "ok": true
+     }
+    ],
+    "impact": null,
+    "ms": 2489
+   },
+   "C": {
+    "overall": {
+     "expected": "UNKNOWN",
+     "reported": "UNKNOWN",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [
+     {
+      "rules": [
+       "RI-NOT-LINKED"
+      ],
+      "anchors": [
+       "openspec:seat-hold/single-seat-hold"
+      ],
+      "reported": true
+     }
+    ],
+    "mappings": [
+     {
+      "link": "VERIFIES|alloy:formal/booking.als#assert:SingleHolder|openspec:seat-hold/single-seat-hold",
+      "expected": false,
+      "ok": true
+     }
+    ],
+    "impact": null,
+    "ms": 4668
+   },
+   "Dprime": {
+    "overall": {
+     "expected": "UNKNOWN",
+     "reported": "UNKNOWN",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [
+     {
+      "rules": [
+       "RI-NOT-LINKED"
+      ],
+      "anchors": [
+       "openspec:seat-hold/single-seat-hold"
+      ],
+      "reported": true
+     }
+    ],
+    "mappings": [
+     {
+      "link": "VERIFIES|alloy:formal/booking.als#assert:SingleHolder|openspec:seat-hold/single-seat-hold",
+      "expected": false,
+      "ok": true
+     }
+    ],
+    "impact": null,
+    "ms": 4710,
+    "acceptedHeuristicLinks": 0
+   },
+   "reproducible": true,
+   "hashes": [
+    "a5b923ab162d76a4",
+    "a5b923ab162d76a4"
+   ],
+   "exitCode": 3,
+   "status": "PASS",
+   "coverage": {
+    "requirementTraceability": {
+     "covered": 4,
+     "total": 4,
+     "ratio": 1
+    },
+    "apiContractLinkage": {
+     "covered": 2,
+     "total": 2,
+     "ratio": 1
+    },
+    "architectureLinkage": {
+     "covered": 2,
+     "total": 4,
+     "ratio": 0.5
+    },
+    "invariantVerification": {
+     "covered": 0,
+     "total": 1,
+     "ratio": 0
+    },
+    "executedVerification": {
+     "covered": 5,
+     "total": 5,
+     "ratio": 1
+    }
+   },
+   "aiUsage": {
+    "provider": null,
+    "calls": 0,
+    "tokens": null,
+    "note": "no AI provider configured; no AI calls were made"
+   }
+  },
+  {
+   "case": "09-nonexistent-entity-mapping",
+   "class": "9. mapping to a non-existent entity",
+   "reviewStatus": "agent-authored ground truth; NOT reviewed by a human",
+   "command": [
+    "verify",
+    "--base-ref",
+    "HEAD"
+   ],
+   "A": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONSISTENT",
+     "ok": false,
+     "falsePass": true
+    },
+    "tp": 0,
+    "fn": 1,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "ghost-mapping",
+      "detected": false,
+      "by": null,
+      "traced": null
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": null,
+    "ms": 1162
+   },
+   "B": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONFLICT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 1,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "ghost-mapping",
+      "detected": true,
+      "by": "MAP-DANGLING",
+      "traced": null
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": null,
+    "ms": 2456
+   },
+   "C": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONFLICT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 1,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "ghost-mapping",
+      "detected": true,
+      "by": "MAP-DANGLING",
+      "traced": null
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": null,
+    "ms": 4610
+   },
+   "Dprime": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONFLICT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 1,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "ghost-mapping",
+      "detected": true,
+      "by": "MAP-DANGLING",
+      "traced": null
+     }
+    ],
+    "unknowns": [],
+    "mappings": [],
+    "impact": null,
+    "ms": 4628,
+    "acceptedHeuristicLinks": 0
+   },
+   "reproducible": true,
+   "hashes": [
+    "161cbf98ff88a05e",
+    "161cbf98ff88a05e"
+   ],
+   "exitCode": 1,
+   "status": "FAIL",
+   "coverage": {
+    "requirementTraceability": {
+     "covered": 4,
+     "total": 4,
+     "ratio": 1
+    },
+    "apiContractLinkage": {
+     "covered": 2,
+     "total": 2,
+     "ratio": 1
+    },
+    "architectureLinkage": {
+     "covered": 2,
+     "total": 4,
+     "ratio": 0.5
+    },
+    "invariantVerification": {
+     "covered": 1,
+     "total": 1,
+     "ratio": 1
+    },
+    "executedVerification": {
+     "covered": 5,
+     "total": 5,
+     "ratio": 1
+    }
+   },
+   "aiUsage": {
+    "provider": null,
+    "calls": 0,
+    "tokens": null,
+    "note": "no AI provider configured; no AI calls were made"
+   }
+  },
+  {
+   "case": "10-wrong-ai-candidate",
+   "class": "10. wrong AI link candidate",
+   "reviewStatus": "agent-authored ground truth; NOT reviewed by a human",
+   "command": [
+    "verify",
+    "--base-ref",
+    "HEAD"
+   ],
+   "A": {
+    "overall": {
+     "expected": "CONSISTENT",
+     "reported": "CONSISTENT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [],
+    "mappings": [
+     {
+      "link": "VERIFIES|alloy:formal/booking.als#assert:SingleHolder|openspec:payment/payment-confirmation",
+      "expected": false,
+      "ok": true
+     }
+    ],
+    "impact": null,
+    "ms": 1148
+   },
+   "B": {
+    "overall": {
+     "expected": "CONSISTENT",
+     "reported": "CONSISTENT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [],
+    "mappings": [
+     {
+      "link": "VERIFIES|alloy:formal/booking.als#assert:SingleHolder|openspec:payment/payment-confirmation",
+      "expected": false,
+      "ok": true
+     }
+    ],
+    "impact": null,
+    "ms": 2440
+   },
+   "C": {
+    "overall": {
+     "expected": "CONSISTENT",
+     "reported": "CONSISTENT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [],
+    "mappings": [
+     {
+      "link": "VERIFIES|alloy:formal/booking.als#assert:SingleHolder|openspec:payment/payment-confirmation",
+      "expected": false,
+      "ok": true
+     }
+    ],
+    "impact": null,
+    "ms": 4692
+   },
+   "Dprime": {
+    "overall": {
+     "expected": "CONSISTENT",
+     "reported": "CONSISTENT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [],
+    "mappings": [
+     {
+      "link": "VERIFIES|alloy:formal/booking.als#assert:SingleHolder|openspec:payment/payment-confirmation",
+      "expected": false,
+      "ok": true
+     }
+    ],
+    "impact": null,
+    "ms": 4707,
+    "acceptedHeuristicLinks": 0
+   },
+   "reproducible": true,
+   "hashes": [
+    "e230ab8b0676d782",
+    "e230ab8b0676d782"
+   ],
+   "exitCode": 0,
+   "status": "PASS",
+   "coverage": {
+    "requirementTraceability": {
+     "covered": 4,
+     "total": 4,
+     "ratio": 1
+    },
+    "apiContractLinkage": {
+     "covered": 2,
+     "total": 2,
+     "ratio": 1
+    },
+    "architectureLinkage": {
+     "covered": 2,
+     "total": 4,
+     "ratio": 0.5
+    },
+    "invariantVerification": {
+     "covered": 1,
+     "total": 1,
+     "ratio": 1
+    },
+    "executedVerification": {
+     "covered": 5,
+     "total": 5,
+     "ratio": 1
+    }
+   },
+   "aiUsage": {
+    "provider": null,
+    "calls": 0,
+    "tokens": null,
+    "note": "no AI provider configured; no AI calls were made"
+   }
+  },
+  {
+   "case": "11-same-term-different-meaning",
+   "class": "11. same term, different meaning",
+   "reviewStatus": "agent-authored ground truth; NOT reviewed by a human",
+   "command": [
+    "verify",
+    "--base-ref",
+    "HEAD"
+   ],
+   "A": {
+    "overall": {
+     "expected": "CONSISTENT",
+     "reported": "CONSISTENT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 1,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [],
+    "mappings": [
+     {
+      "link": "CORRESPONDS_TO|alloy:formal/locks.als#sig:Hold|typespec:type:BookingApi.Hold",
+      "expected": false,
+      "ok": true
+     },
+     {
+      "link": "CORRESPONDS_TO|alloy:formal/locks.als#field:Hold.holder|typespec:field:BookingApi.Hold.holder",
+      "expected": false,
+      "ok": true
+     }
+    ],
+    "impact": null,
+    "ms": 1409
+   },
+   "B": {
+    "overall": {
+     "expected": "CONSISTENT",
+     "reported": "CONSISTENT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 1,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [],
+    "mappings": [
+     {
+      "link": "CORRESPONDS_TO|alloy:formal/locks.als#sig:Hold|typespec:type:BookingApi.Hold",
+      "expected": false,
+      "ok": true
+     },
+     {
+      "link": "CORRESPONDS_TO|alloy:formal/locks.als#field:Hold.holder|typespec:field:BookingApi.Hold.holder",
+      "expected": false,
+      "ok": true
+     }
+    ],
+    "impact": null,
+    "ms": 2856
+   },
+   "C": {
+    "overall": {
+     "expected": "CONSISTENT",
+     "reported": "CONSISTENT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 1,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [],
+    "mappings": [
+     {
+      "link": "CORRESPONDS_TO|alloy:formal/locks.als#sig:Hold|typespec:type:BookingApi.Hold",
+      "expected": false,
+      "ok": true
+     },
+     {
+      "link": "CORRESPONDS_TO|alloy:formal/locks.als#field:Hold.holder|typespec:field:BookingApi.Hold.holder",
+      "expected": false,
+      "ok": true
+     }
+    ],
+    "impact": null,
+    "ms": 5088
+   },
+   "Dprime": {
+    "overall": {
+     "expected": "CONSISTENT",
+     "reported": "UNKNOWN",
+     "ok": false,
+     "falsePass": false
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 1,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [],
+    "mappings": [
+     {
+      "link": "CORRESPONDS_TO|alloy:formal/locks.als#sig:Hold|typespec:type:BookingApi.Hold",
+      "expected": false,
+      "ok": false
+     },
+     {
+      "link": "CORRESPONDS_TO|alloy:formal/locks.als#field:Hold.holder|typespec:field:BookingApi.Hold.holder",
+      "expected": false,
+      "ok": false
+     }
+    ],
+    "impact": null,
+    "ms": 5036,
+    "acceptedHeuristicLinks": 2
+   },
+   "reproducible": true,
+   "hashes": [
+    "d5d6227d4558cfd8",
+    "d5d6227d4558cfd8"
+   ],
+   "exitCode": 0,
+   "status": "PASS",
+   "coverage": {
+    "requirementTraceability": {
+     "covered": 4,
+     "total": 4,
+     "ratio": 1
+    },
+    "apiContractLinkage": {
+     "covered": 2,
+     "total": 2,
+     "ratio": 1
+    },
+    "architectureLinkage": {
+     "covered": 2,
+     "total": 4,
+     "ratio": 0.5
+    },
+    "invariantVerification": {
+     "covered": 1,
+     "total": 1,
+     "ratio": 1
+    },
+    "executedVerification": {
+     "covered": 6,
+     "total": 6,
+     "ratio": 1
+    }
+   },
+   "aiUsage": {
+    "provider": null,
+    "calls": 0,
+    "tokens": null,
+    "note": "no AI provider configured; no AI calls were made"
+   }
+  },
+  {
+   "case": "12-scope-false-contradiction",
+   "class": "12. false contradiction from differing scope/state",
+   "reviewStatus": "agent-authored ground truth; NOT reviewed by a human",
+   "command": [
+    "verify",
+    "--base-ref",
+    "HEAD"
+   ],
+   "A": {
+    "overall": {
+     "expected": "UNKNOWN",
+     "reported": "CONSISTENT",
+     "ok": false,
+     "falsePass": true
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 2,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [
+     {
+      "rules": [
+       "RC-REQUIRED-OPTIONAL"
+      ],
+      "anchors": [
+       "typespec:field:BookingApi.Hold.releasedAt"
+      ],
+      "reported": false
+     }
+    ],
+    "mappings": [],
+    "impact": null,
+    "ms": 1164
+   },
+   "B": {
+    "overall": {
+     "expected": "UNKNOWN",
+     "reported": "UNKNOWN",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 2,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [
+     {
+      "rules": [
+       "RC-REQUIRED-OPTIONAL"
+      ],
+      "anchors": [
+       "typespec:field:BookingApi.Hold.releasedAt"
+      ],
+      "reported": false
+     }
+    ],
+    "mappings": [],
+    "impact": null,
+    "ms": 2451
+   },
+   "C": {
+    "overall": {
+     "expected": "UNKNOWN",
+     "reported": "UNKNOWN",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 2,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [
+     {
+      "rules": [
+       "RC-REQUIRED-OPTIONAL"
+      ],
+      "anchors": [
+       "typespec:field:BookingApi.Hold.releasedAt"
+      ],
+      "reported": true
+     }
+    ],
+    "mappings": [],
+    "impact": null,
+    "ms": 4647
+   },
+   "Dprime": {
+    "overall": {
+     "expected": "UNKNOWN",
+     "reported": "UNKNOWN",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 2,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [
+     {
+      "rules": [
+       "RC-REQUIRED-OPTIONAL"
+      ],
+      "anchors": [
+       "typespec:field:BookingApi.Hold.releasedAt"
+      ],
+      "reported": true
+     }
+    ],
+    "mappings": [],
+    "impact": null,
+    "ms": 4640,
+    "acceptedHeuristicLinks": 0
+   },
+   "reproducible": true,
+   "hashes": [
+    "b6a3ba2a84ea7bb1",
+    "b6a3ba2a84ea7bb1"
+   ],
+   "exitCode": 3,
+   "status": "PASS",
+   "coverage": {
+    "requirementTraceability": {
+     "covered": 4,
+     "total": 4,
+     "ratio": 1
+    },
+    "apiContractLinkage": {
+     "covered": 2,
+     "total": 2,
+     "ratio": 1
+    },
+    "architectureLinkage": {
+     "covered": 2,
+     "total": 4,
+     "ratio": 0.5
+    },
+    "invariantVerification": {
+     "covered": 0,
+     "total": 1,
+     "ratio": 0
+    },
+    "executedVerification": {
+     "covered": 5,
+     "total": 5,
+     "ratio": 1
+    }
+   },
+   "aiUsage": {
+    "provider": null,
+    "calls": 0,
+    "tokens": null,
+    "note": "no AI provider configured; no AI calls were made"
+   }
+  },
+  {
+   "case": "13-incomplete-unknown",
+   "class": "13. UNKNOWN caused by incomplete specification",
+   "reviewStatus": "agent-authored ground truth; NOT reviewed by a human",
+   "command": [
+    "verify",
+    "--base-ref",
+    "HEAD"
+   ],
+   "A": {
+    "overall": {
+     "expected": "UNKNOWN",
+     "reported": "CONSISTENT",
+     "ok": false,
+     "falsePass": true
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 1,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [
+     {
+      "rules": [
+       "RC-RANGE-MISSING",
+       "RC-RANGE-RANGE"
+      ],
+      "anchors": [
+       "typespec:field:BookingApi.ConfirmRequest.paymentToken"
+      ],
+      "reported": false
+     },
+     {
+      "rules": [
+       "REQ-AMBIGUOUS-NL"
+      ],
+      "anchors": [
+       "openspec:payment/payment-confirmation"
+      ],
+      "reported": false
+     }
+    ],
+    "mappings": [],
+    "impact": null,
+    "ms": 1148
+   },
+   "B": {
+    "overall": {
+     "expected": "UNKNOWN",
+     "reported": "CONSISTENT",
+     "ok": false,
+     "falsePass": true
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 1,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [
+     {
+      "rules": [
+       "RC-RANGE-MISSING",
+       "RC-RANGE-RANGE"
+      ],
+      "anchors": [
+       "typespec:field:BookingApi.ConfirmRequest.paymentToken"
+      ],
+      "reported": false
+     },
+     {
+      "rules": [
+       "REQ-AMBIGUOUS-NL"
+      ],
+      "anchors": [
+       "openspec:payment/payment-confirmation"
+      ],
+      "reported": false
+     }
+    ],
+    "mappings": [],
+    "impact": null,
+    "ms": 2440
+   },
+   "C": {
+    "overall": {
+     "expected": "UNKNOWN",
+     "reported": "UNKNOWN",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 1,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [
+     {
+      "rules": [
+       "RC-RANGE-MISSING",
+       "RC-RANGE-RANGE"
+      ],
+      "anchors": [
+       "typespec:field:BookingApi.ConfirmRequest.paymentToken"
+      ],
+      "reported": true
+     },
+     {
+      "rules": [
+       "REQ-AMBIGUOUS-NL"
+      ],
+      "anchors": [
+       "openspec:payment/payment-confirmation"
+      ],
+      "reported": true
+     }
+    ],
+    "mappings": [],
+    "impact": null,
+    "ms": 4648
+   },
+   "Dprime": {
+    "overall": {
+     "expected": "UNKNOWN",
+     "reported": "UNKNOWN",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 1,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [
+     {
+      "rules": [
+       "RC-RANGE-MISSING",
+       "RC-RANGE-RANGE"
+      ],
+      "anchors": [
+       "typespec:field:BookingApi.ConfirmRequest.paymentToken"
+      ],
+      "reported": true
+     },
+     {
+      "rules": [
+       "REQ-AMBIGUOUS-NL"
+      ],
+      "anchors": [
+       "openspec:payment/payment-confirmation"
+      ],
+      "reported": true
+     }
+    ],
+    "mappings": [],
+    "impact": null,
+    "ms": 4636,
+    "acceptedHeuristicLinks": 0
+   },
+   "reproducible": true,
+   "hashes": [
+    "ea60228513c62894",
+    "ea60228513c62894"
+   ],
+   "exitCode": 3,
+   "status": "PASS",
+   "coverage": {
+    "requirementTraceability": {
+     "covered": 4,
+     "total": 4,
+     "ratio": 1
+    },
+    "apiContractLinkage": {
+     "covered": 2,
+     "total": 2,
+     "ratio": 1
+    },
+    "architectureLinkage": {
+     "covered": 2,
+     "total": 4,
+     "ratio": 0.5
+    },
+    "invariantVerification": {
+     "covered": 1,
+     "total": 1,
+     "ratio": 1
+    },
+    "executedVerification": {
+     "covered": 5,
+     "total": 5,
+     "ratio": 1
+    }
+   },
+   "aiUsage": {
+    "provider": null,
+    "calls": 0,
+    "tokens": null,
+    "note": "no AI provider configured; no AI calls were made"
+   }
+  },
+  {
+   "case": "14-invalidated-mapping",
+   "class": "14. mapping invalidated by a change",
+   "reviewStatus": "agent-authored ground truth; NOT reviewed by a human",
+   "command": [
+    "verify",
+    "--base-ref",
+    "HEAD"
+   ],
+   "A": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONSISTENT",
+     "ok": false,
+     "falsePass": true
+    },
+    "tp": 0,
+    "fn": 3,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "mapping-1-invalidated",
+      "detected": false,
+      "by": null,
+      "traced": null
+     },
+     {
+      "defect": "mapping-2-invalidated",
+      "detected": false,
+      "by": null,
+      "traced": null
+     },
+     {
+      "defect": "stale-contract-reference",
+      "detected": false,
+      "by": null,
+      "traced": null
+     }
+    ],
+    "unknowns": [
+     {
+      "rules": [
+       "RI-NOT-LINKED"
+      ],
+      "anchors": [
+       "openspec:seat-hold/exclusive-seat-hold"
+      ],
+      "reported": false
+     }
+    ],
+    "mappings": [],
+    "impact": {
+     "mustInclude": [],
+     "invalidatedMappings": [
+      {
+       "id": "map-verifies-tv5aeg",
+       "ok": false
+      },
+      {
+       "id": "map-verifies-27qk9r",
+       "ok": false
+      }
+     ]
+    },
+    "ms": 1157
+   },
+   "B": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONFLICT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 3,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "mapping-1-invalidated",
+      "detected": true,
+      "by": "MAP-DANGLING",
+      "traced": null
+     },
+     {
+      "defect": "mapping-2-invalidated",
+      "detected": true,
+      "by": "MAP-DANGLING",
+      "traced": null
+     },
+     {
+      "defect": "stale-contract-reference",
+      "detected": true,
+      "by": "REF-DANGLING",
+      "traced": null
+     }
+    ],
+    "unknowns": [
+     {
+      "rules": [
+       "RI-NOT-LINKED"
+      ],
+      "anchors": [
+       "openspec:seat-hold/exclusive-seat-hold"
+      ],
+      "reported": false
+     }
+    ],
+    "mappings": [],
+    "impact": {
+     "mustInclude": [],
+     "invalidatedMappings": [
+      {
+       "id": "map-verifies-tv5aeg",
+       "ok": false
+      },
+      {
+       "id": "map-verifies-27qk9r",
+       "ok": false
+      }
+     ]
+    },
+    "ms": 2458
+   },
+   "C": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONFLICT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 3,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "mapping-1-invalidated",
+      "detected": true,
+      "by": "MAP-DANGLING",
+      "traced": null
+     },
+     {
+      "defect": "mapping-2-invalidated",
+      "detected": true,
+      "by": "MAP-DANGLING",
+      "traced": null
+     },
+     {
+      "defect": "stale-contract-reference",
+      "detected": true,
+      "by": "REF-DANGLING",
+      "traced": null
+     }
+    ],
+    "unknowns": [
+     {
+      "rules": [
+       "RI-NOT-LINKED"
+      ],
+      "anchors": [
+       "openspec:seat-hold/exclusive-seat-hold"
+      ],
+      "reported": true
+     }
+    ],
+    "mappings": [],
+    "impact": {
+     "mustInclude": [],
+     "invalidatedMappings": [
+      {
+       "id": "map-verifies-tv5aeg",
+       "ok": true
+      },
+      {
+       "id": "map-verifies-27qk9r",
+       "ok": true
+      }
+     ]
+    },
+    "ms": 4701
+   },
+   "Dprime": {
+    "overall": {
+     "expected": "CONFLICT",
+     "reported": "CONFLICT",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 3,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [
+     {
+      "defect": "mapping-1-invalidated",
+      "detected": true,
+      "by": "MAP-DANGLING",
+      "traced": null
+     },
+     {
+      "defect": "mapping-2-invalidated",
+      "detected": true,
+      "by": "MAP-DANGLING",
+      "traced": null
+     },
+     {
+      "defect": "stale-contract-reference",
+      "detected": true,
+      "by": "REF-DANGLING",
+      "traced": null
+     }
+    ],
+    "unknowns": [
+     {
+      "rules": [
+       "RI-NOT-LINKED"
+      ],
+      "anchors": [
+       "openspec:seat-hold/exclusive-seat-hold"
+      ],
+      "reported": true
+     }
+    ],
+    "mappings": [],
+    "impact": {
+     "mustInclude": [],
+     "invalidatedMappings": [
+      {
+       "id": "map-verifies-tv5aeg",
+       "ok": true
+      },
+      {
+       "id": "map-verifies-27qk9r",
+       "ok": true
+      }
+     ]
+    },
+    "ms": 4652,
+    "acceptedHeuristicLinks": 0
+   },
+   "reproducible": true,
+   "hashes": [
+    "be867b1df7bf2ad5",
+    "be867b1df7bf2ad5"
+   ],
+   "exitCode": 1,
+   "status": "FAIL",
+   "coverage": {
+    "requirementTraceability": {
+     "covered": 4,
+     "total": 4,
+     "ratio": 1
+    },
+    "apiContractLinkage": {
+     "covered": 2,
+     "total": 2,
+     "ratio": 1
+    },
+    "architectureLinkage": {
+     "covered": 2,
+     "total": 4,
+     "ratio": 0.5
+    },
+    "invariantVerification": {
+     "covered": 0,
+     "total": 1,
+     "ratio": 0
+    },
+    "executedVerification": {
+     "covered": 5,
+     "total": 5,
+     "ratio": 1
+    }
+   },
+   "aiUsage": {
+    "provider": null,
+    "calls": 0,
+    "tokens": null,
+    "note": "no AI provider configured; no AI calls were made"
+   }
+  },
+  {
+   "case": "15-false-pass-prevention",
+   "class": "15. no false PASS for unverified areas",
+   "reviewStatus": "agent-authored ground truth; NOT reviewed by a human",
+   "command": [
+    "verify"
+   ],
+   "A": {
+    "overall": {
+     "expected": "UNKNOWN",
+     "reported": "CONSISTENT",
+     "ok": false,
+     "falsePass": true
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [
+     {
+      "rules": [
+       "RI-NOT-EXECUTABLE"
+      ],
+      "anchors": [
+       "alloy:formal/booking.als#assert:HeldHasHolder"
+      ],
+      "reported": false
+     }
+    ],
+    "mappings": [],
+    "impact": null,
+    "ms": 1056
+   },
+   "B": {
+    "overall": {
+     "expected": "UNKNOWN",
+     "reported": "CONSISTENT",
+     "ok": false,
+     "falsePass": true
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [
+     {
+      "rules": [
+       "RI-NOT-EXECUTABLE"
+      ],
+      "anchors": [
+       "alloy:formal/booking.als#assert:HeldHasHolder"
+      ],
+      "reported": false
+     }
+    ],
+    "mappings": [],
+    "impact": null,
+    "ms": 2357
+   },
+   "C": {
+    "overall": {
+     "expected": "UNKNOWN",
+     "reported": "UNKNOWN",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [
+     {
+      "rules": [
+       "RI-NOT-EXECUTABLE"
+      ],
+      "anchors": [
+       "alloy:formal/booking.als#assert:HeldHasHolder"
+      ],
+      "reported": true
+     }
+    ],
+    "mappings": [],
+    "impact": null,
+    "ms": 2926
+   },
+   "Dprime": {
+    "overall": {
+     "expected": "UNKNOWN",
+     "reported": "UNKNOWN",
+     "ok": true,
+     "falsePass": false
+    },
+    "tp": 0,
+    "fn": 0,
+    "fp": 0,
+    "fpFindings": [],
+    "tn": 0,
+    "negativesFlagged": 0,
+    "defects": [],
+    "unknowns": [
+     {
+      "rules": [
+       "RI-NOT-EXECUTABLE"
+      ],
+      "anchors": [
+       "alloy:formal/booking.als#assert:HeldHasHolder"
+      ],
+      "reported": true
+     }
+    ],
+    "mappings": [],
+    "impact": null,
+    "ms": 3000,
+    "acceptedHeuristicLinks": 0
+   },
+   "reproducible": true,
+   "hashes": [
+    "e804fbcfee319eca",
+    "e804fbcfee319eca"
+   ],
+   "exitCode": 3,
+   "status": "SKIP",
+   "coverage": {
+    "requirementTraceability": {
+     "covered": 4,
+     "total": 4,
+     "ratio": 1
+    },
+    "apiContractLinkage": {
+     "covered": 2,
+     "total": 2,
+     "ratio": 1
+    },
+    "architectureLinkage": {
+     "covered": 2,
+     "total": 4,
+     "ratio": 0.5
+    },
+    "invariantVerification": {
+     "covered": 0,
+     "total": 1,
+     "ratio": 0
+    },
+    "executedVerification": {
+     "covered": 3,
+     "total": 4,
+     "ratio": 0.75
+    }
+   },
+   "aiUsage": {
+    "provider": null,
+    "calls": 0,
+    "tokens": null,
+    "note": "no AI provider configured; no AI calls were made"
+   }
+  }
+ ]
+}

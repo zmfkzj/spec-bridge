@@ -1,0 +1,83 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://specbridge.local/schemas/benchmark-case.schema.json",
+ "title": "SpecBridge benchmark case ground truth (bench/cases/*/case.yaml)",
+ "type": "object",
+ "required": [
+  "class",
+  "reviewStatus",
+  "description",
+  "command",
+  "expected"
+ ],
+ "properties": {
+  "class": {
+   "type": "string"
+  },
+  "reviewStatus": {
+   "type": "string",
+   "pattern": "NOT reviewed by a human|human-reviewed by .+"
+  },
+  "description": {
+   "type": "string"
+  },
+  "command": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "pre": {
+   "type": "array"
+  },
+  "env": {
+   "type": "object"
+  },
+  "expected": {
+   "type": "object",
+   "required": [
+    "overallVerdict",
+    "conflicts"
+   ],
+   "properties": {
+    "overallVerdict": {
+     "enum": [
+      "CONSISTENT",
+      "CONFLICT",
+      "UNKNOWN"
+     ]
+    },
+    "conflicts": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "defect",
+       "rules",
+       "anchors"
+      ]
+     }
+    },
+    "unknowns": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "rules",
+       "anchors"
+      ]
+     }
+    },
+    "mustNotConflict": {
+     "type": "array"
+    },
+    "mappings": {
+     "type": "object"
+    },
+    "impact": {
+     "type": "object"
+    }
+   }
+  }
+ }
+}

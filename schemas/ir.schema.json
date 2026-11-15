@@ -1,0 +1,516 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://specbridge.local/schemas/ir.schema.json",
+ "title": "SpecBridge Semantic IR",
+ "description": "Derived, regenerable semantic model (.specbridge/ir.json). Never a replacement for the source specifications.",
+ "type": "object",
+ "required": [
+  "schemaVersion",
+  "workspace",
+  "git",
+  "sources",
+  "entities",
+  "relations",
+  "constraints",
+  "mappings",
+  "references",
+  "diagnostics"
+ ],
+ "$defs": {
+  "location": {
+   "type": "object",
+   "required": [
+    "file"
+   ],
+   "properties": {
+    "file": {
+     "type": "string"
+    },
+    "line": {
+     "type": "integer",
+     "minimum": 0
+    },
+    "column": {
+     "type": "integer"
+    },
+    "endLine": {
+     "type": "integer"
+    },
+    "endColumn": {
+     "type": "integer"
+    },
+    "locatedBy": {
+     "enum": [
+      "tool",
+      "source-locator"
+     ]
+    }
+   }
+  },
+  "evidence": {
+   "type": "object",
+   "required": [
+    "kind",
+    "detail"
+   ],
+   "properties": {
+    "kind": {
+     "enum": [
+      "source",
+      "tool-output",
+      "mapping",
+      "rule",
+      "execution",
+      "proposal"
+     ]
+    },
+    "detail": {
+     "type": "string"
+    },
+    "location": {
+     "$ref": "#/$defs/location"
+    },
+    "rule": {
+     "type": "string"
+    },
+    "reproduce": {
+     "type": "string"
+    }
+   }
+  },
+  "trust": {
+   "enum": [
+    "Explicit",
+    "Derived",
+    "Proposed",
+    "Rejected"
+   ]
+  },
+  "entity": {
+   "type": "object",
+   "required": [
+    "id",
+    "type",
+    "name",
+    "tool",
+    "source",
+    "version",
+    "extraction",
+    "validation",
+    "trust",
+    "fingerprint",
+    "attrs",
+    "evidence"
+   ],
+   "properties": {
+    "id": {
+     "type": "string",
+     "pattern": "^[a-z0-9-]+:"
+    },
+    "type": {
+     "enum": [
+      "Requirement",
+      "Scenario",
+      "Component",
+      "Interface",
+      "Operation",
+      "DataType",
+      "Constraint",
+      "State",
+      "Transition",
+      "Invariant",
+      "Field",
+      "Predicate",
+      "Command",
+      "Change",
+      "Flow",
+      "DeploymentNode"
+     ]
+    },
+    "name": {
+     "type": "string"
+    },
+    "tool": {
+     "enum": [
+      "openspec",
+      "likec4",
+      "typespec",
+      "alloy",
+      "oasdiff",
+      "specbridge"
+     ]
+    },
+    "source": {
+     "$ref": "#/$defs/location"
+    },
+    "version": {
+     "type": "object",
+     "required": [
+      "tool",
+      "toolVersion"
+     ],
+     "properties": {
+      "tool": {
+       "enum": [
+        "openspec",
+        "likec4",
+        "typespec",
+        "alloy",
+        "oasdiff",
+        "specbridge"
+       ]
+      },
+      "toolVersion": {
+       "type": "string"
+      },
+      "fileSha256": {
+       "type": "string"
+      },
+      "gitRevision": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "gitDirty": {
+       "type": "boolean"
+      }
+     }
+    },
+    "extraction": {
+     "type": "object",
+     "required": [
+      "method",
+      "adapter"
+     ],
+     "properties": {
+      "method": {
+       "enum": [
+        "cli-json",
+        "compiler-api",
+        "model-api",
+        "java-api",
+        "tool-json",
+        "source-locator",
+        "scn-pattern",
+        "derived-rule",
+        "approved-mapping",
+        "heuristic",
+        "ai"
+       ]
+      },
+      "adapter": {
+       "type": "string"
+      },
+      "lossy": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "validation": {
+     "type": "object",
+     "required": [
+      "status"
+     ],
+     "properties": {
+      "status": {
+       "enum": [
+        "tool-validated",
+        "unvalidated",
+        "invalid",
+        "not-applicable"
+       ]
+      }
+     }
+    },
+    "trust": {
+     "$ref": "#/$defs/trust"
+    },
+    "fingerprint": {
+     "type": "string"
+    },
+    "attrs": {
+     "type": "object"
+    },
+    "evidence": {
+     "type": "array",
+     "items": {
+      "$ref": "#/$defs/evidence"
+     }
+    }
+   }
+  },
+  "relation": {
+   "type": "object",
+   "required": [
+    "id",
+    "type",
+    "from",
+    "to",
+    "trust",
+    "rule",
+    "evidence"
+   ],
+   "properties": {
+    "type": {
+     "enum": [
+      "REQUIRES",
+      "SATISFIES",
+      "IMPLEMENTS",
+      "DEPENDS_ON",
+      "EXPOSES",
+      "CONSUMES",
+      "OWNS",
+      "CONSTRAINS",
+      "TRANSITIONS_TO",
+      "VERIFIES",
+      "CONFLICTS_WITH",
+      "IMPACTS",
+      "CONTAINS",
+      "REFERENCES",
+      "EXTENDS",
+      "CORRESPONDS_TO",
+      "DEPLOYS",
+      "CHANGES"
+     ]
+    },
+    "from": {
+     "type": "string"
+    },
+    "to": {
+     "type": "string"
+    },
+    "trust": {
+     "enum": [
+      "Explicit",
+      "Derived",
+      "Rejected"
+     ],
+     "description": "Proposed links are never stored in the IR (see .specbridge/proposals.json)"
+    },
+    "rule": {
+     "type": "string"
+    },
+    "evidence": {
+     "type": "array",
+     "minItems": 1,
+     "items": {
+      "$ref": "#/$defs/evidence"
+     }
+    },
+    "mappingId": {
+     "type": "string"
+    },
+    "stale": {
+     "type": "boolean"
+    }
+   }
+  },
+  "constraint": {
+   "type": "object",
+   "required": [
+    "id",
+    "kind",
+    "origin",
+    "tool",
+    "trust",
+    "interpretation",
+    "subject",
+    "params",
+    "text",
+    "source",
+    "evidence"
+   ],
+   "properties": {
+    "kind": {
+     "enum": [
+      "Equality",
+      "Inequality",
+      "Cardinality",
+      "Required",
+      "Optional",
+      "Range",
+      "TypeCompatibility",
+      "DependencyRestriction",
+      "Ownership",
+      "Exclusivity",
+      "StateInvariant",
+      "ErrorResponse"
+     ]
+    },
+    "interpretation": {
+     "enum": [
+      "structured",
+      "scn-pattern",
+      "alloy-reference",
+      "uninterpreted"
+     ]
+    },
+    "trust": {
+     "$ref": "#/$defs/trust"
+    },
+    "subject": {
+     "type": "object",
+     "required": [
+      "direction"
+     ],
+     "properties": {
+      "direction": {
+       "enum": [
+        "request",
+        "response",
+        "stored",
+        "any"
+       ]
+      },
+      "state": {
+       "type": "string"
+      },
+      "concept": {
+       "type": "string"
+      },
+      "field": {
+       "type": "string"
+      },
+      "conceptKey": {
+       "type": "string"
+      },
+      "fieldKey": {
+       "type": "string"
+      },
+      "entity": {
+       "type": "string"
+      },
+      "operation": {
+       "type": "string"
+      }
+     }
+    },
+    "params": {
+     "type": "object"
+    },
+    "source": {
+     "$ref": "#/$defs/location"
+    },
+    "evidence": {
+     "type": "array",
+     "items": {
+      "$ref": "#/$defs/evidence"
+     }
+    }
+   }
+  }
+ },
+ "properties": {
+  "schemaVersion": {
+   "const": "1.0.0"
+  },
+  "workspace": {
+   "type": "string"
+  },
+  "git": {
+   "type": "object",
+   "required": [
+    "revision",
+    "dirty"
+   ]
+  },
+  "sources": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "tool",
+     "toolVersion",
+     "files",
+     "status",
+     "diagnostics",
+     "lossy",
+     "interface"
+    ],
+    "properties": {
+     "status": {
+      "enum": [
+       "OK",
+       "ERROR",
+       "SKIPPED"
+      ]
+     }
+    }
+   }
+  },
+  "entities": {
+   "type": "array",
+   "items": {
+    "$ref": "#/$defs/entity"
+   }
+  },
+  "relations": {
+   "type": "array",
+   "items": {
+    "$ref": "#/$defs/relation"
+   }
+  },
+  "constraints": {
+   "type": "array",
+   "items": {
+    "$ref": "#/$defs/constraint"
+   }
+  },
+  "mappings": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "id",
+     "type",
+     "from",
+     "to",
+     "status",
+     "validity",
+     "reasons"
+    ],
+    "properties": {
+     "validity": {
+      "enum": [
+       "VALID",
+       "STALE",
+       "INVALIDATED",
+       "NOT_EVALUATED"
+      ]
+     }
+    }
+   }
+  },
+  "references": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "from",
+     "ref",
+     "relation",
+     "rule",
+     "tool",
+     "strict",
+     "status"
+    ],
+    "properties": {
+     "status": {
+      "enum": [
+       "resolved",
+       "ambiguous",
+       "unresolved"
+      ]
+     }
+    }
+   }
+  },
+  "diagnostics": {
+   "type": "array"
+  }
+ }
+}

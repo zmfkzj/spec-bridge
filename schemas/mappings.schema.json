@@ -1,0 +1,100 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://specbridge.local/schemas/mappings.schema.json",
+ "title": "SpecBridge approved mappings (specbridge/mappings.yaml)",
+ "description": "Human-reviewed, source-controlled mapping data. Only status approved|rejected is stored; proposals live in .specbridge/proposals.json.",
+ "type": "object",
+ "required": [
+  "mappings"
+ ],
+ "properties": {
+  "mappings": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "id",
+     "type",
+     "from",
+     "to",
+     "status"
+    ],
+    "properties": {
+     "id": {
+      "type": "string"
+     },
+     "type": {
+      "enum": [
+       "REQUIRES",
+       "SATISFIES",
+       "IMPLEMENTS",
+       "DEPENDS_ON",
+       "EXPOSES",
+       "CONSUMES",
+       "OWNS",
+       "CONSTRAINS",
+       "TRANSITIONS_TO",
+       "VERIFIES",
+       "CONFLICTS_WITH",
+       "IMPACTS",
+       "CONTAINS",
+       "REFERENCES",
+       "EXTENDS",
+       "CORRESPONDS_TO",
+       "DEPLOYS",
+       "CHANGES"
+      ]
+     },
+     "from": {
+      "type": "string"
+     },
+     "to": {
+      "type": "string"
+     },
+     "status": {
+      "enum": [
+       "approved",
+       "rejected"
+      ]
+     },
+     "approvedBy": {
+      "type": "string",
+      "minLength": 1
+     },
+     "approvedAt": {
+      "type": "string"
+     },
+     "rationale": {
+      "type": "string"
+     },
+     "fingerprints": {
+      "type": "object",
+      "properties": {
+       "from": {
+        "type": "string"
+       },
+       "to": {
+        "type": "string"
+       }
+      }
+     },
+     "source": {
+      "type": "string"
+     }
+    },
+    "if": {
+     "properties": {
+      "status": {
+       "const": "approved"
+      }
+     }
+    },
+    "then": {
+     "required": [
+      "approvedBy"
+     ]
+    }
+   }
+  }
+ }
+}

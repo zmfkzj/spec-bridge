@@ -1,0 +1,21 @@
+specification {
+  element system
+  element component
+  element actor
+}
+model {
+  worker = actor 'Worker'
+  jobs = system 'Job Platform' {
+    jobService = component 'JobService' {
+      metadata {
+        specbridge_provides 'JobApi.Jobs.claimJob'
+        specbridge_requirements 'job-claim/exclusive-job-claim'
+      }
+    }
+  }
+  worker -> jobs.jobService 'claims job' {
+    metadata {
+      specbridge_operations 'JobApi.Jobs.claimJob'
+    }
+  }
+}

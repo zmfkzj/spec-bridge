@@ -1,0 +1,14 @@
+class: 1. all specifications consistent
+reviewStatus: agent-authored ground truth; NOT reviewed by a human
+description: Unmodified benchmark base. Nothing contradicts; every planned check runs (baseline = HEAD).
+command: [verify, --base-ref, HEAD]
+expected:
+  overallVerdict: CONSISTENT
+  conflicts: []
+  mappings:
+    present:
+      - { type: VERIFIES, from: "alloy:formal/booking.als#assert:SingleHolder", to: "openspec:seat-hold/single-seat-hold" }
+      - { type: REQUIRES, from: "openspec:seat-hold/single-seat-hold", to: "typespec:op:BookingApi.Reservations.holdSeat" }
+      - { type: EXPOSES, from: "likec4:booking.bookingService", to: "typespec:op:BookingApi.Reservations.holdSeat" }
+      - { type: CONSUMES, from: "likec4:booking.webApp", to: "typespec:op:BookingApi.Reservations.holdSeat" }
+      - { type: SATISFIES, from: "typespec:op:BookingApi.Reservations.holdSeat", to: "openspec:seat-hold/hold-duration" }

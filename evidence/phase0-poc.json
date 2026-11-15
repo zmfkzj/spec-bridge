@@ -1,0 +1,83 @@
+{
+  "workspace": "/home/arthur/Code/architools/examples/phase0",
+  "steps": [
+    {
+      "name": "openspec",
+      "tool": "openspec",
+      "interface": "openspec show --json",
+      "requirementId": "job-claim/exclusive-job-claim",
+      "requirementName": "Exclusive job claim",
+      "line": 7,
+      "operationRef": "Jobs.claimJob",
+      "requiredField": "ClaimRequest.workerId"
+    },
+    {
+      "name": "likec4",
+      "tool": "likec4",
+      "interface": "LikeC4.fromWorkspace().computedModel()",
+      "errors": 0,
+      "component": "jobs.jobService",
+      "provides": "JobApi.Jobs.claimJob",
+      "line": 9
+    },
+    {
+      "name": "typespec",
+      "tool": "typespec",
+      "interface": "@typespec/compiler compile() + @typespec/http getAllHttpServices()",
+      "operation": "JobApi.Jobs.claimJob",
+      "verb": "post",
+      "path": "/jobs/{id}/claim",
+      "requirementsExtension": [
+        "job-claim/exclusive-job-claim"
+      ],
+      "bodyModel": "ClaimRequest",
+      "property": "workerId",
+      "optional": true,
+      "line": 15
+    },
+    {
+      "name": "alloy",
+      "tool": "alloy",
+      "interface": "CompUtil.parseEverything_fromFile + TranslateAlloyToKodkod.execute_command",
+      "alloyVersion": "6.2.0",
+      "solver": "sat4j",
+      "assertion": "NoDoubleAssignment",
+      "line": 8,
+      "refs": [
+        "Job",
+        "Job.owner"
+      ],
+      "command": "Check NoDoubleAssignment for 3 but 5 steps",
+      "satisfiable": false,
+      "outcome": "NO_COUNTEREXAMPLE_WITHIN_SCOPE"
+    }
+  ],
+  "trace": [
+    "openspec:job-claim/exclusive-job-claim",
+    "likec4:jobs.jobService",
+    "typespec:JobApi.Jobs.claimJob",
+    "alloy:NoDoubleAssignment"
+  ],
+  "traceComplete": true,
+  "contradiction": {
+    "rule": "REQ-CONTRACT-REQUIRED-OPTIONAL",
+    "requirement": {
+      "file": "openspec/specs/job-claim/spec.md",
+      "line": 7,
+      "constraint": "ClaimRequest.workerId required (request)"
+    },
+    "contract": {
+      "file": "api/main.tsp",
+      "line": 15,
+      "constraint": "ClaimRequest.workerId optional (request body of JobApi.Jobs.claimJob)"
+    },
+    "path": [
+      "openspec:job-claim/exclusive-job-claim",
+      "REQUIRES",
+      "typespec:JobApi.Jobs.claimJob",
+      "REFERENCES(request body)",
+      "typespec:ClaimRequest.workerId"
+    ]
+  },
+  "boundedNote": "No counterexample within scope \"Check NoDoubleAssignment for 3 but 5 steps\"; this is not a proof of system correctness."
+}

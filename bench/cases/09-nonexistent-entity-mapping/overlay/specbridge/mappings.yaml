@@ -1,0 +1,42 @@
+# Approved/rejected semantic mappings. Human-reviewed data: edit via `specbridge mapping approve|reject`.
+mappings:
+  - id: map-verifies-tv5aeg
+    type: VERIFIES
+    from: alloy:formal/booking.als#assert:SingleHolder
+    to: openspec:seat-hold/single-seat-hold
+    status: approved
+    approvedBy: benchmark-fixture (agent-authored, not human-reviewed)
+    approvedAt: 2026-11-15T08:37:29.663Z
+    rationale: a seat never has two holders
+    fingerprints:
+      from: 583bbb6ae1b9e5b0
+      to: bf1d653ee605921a
+  - id: map-verifies-27qk9r
+    type: VERIFIES
+    from: alloy:formal/booking.als#assert:HeldHasHolder
+    to: openspec:seat-hold/single-seat-hold
+    status: approved
+    approvedBy: benchmark-fixture (agent-authored, not human-reviewed)
+    approvedAt: 2026-11-15T08:37:31.657Z
+    rationale: a held seat has exactly one holder
+    fingerprints:
+      from: c8f08101998260a1
+      to: bf1d653ee605921a
+  - id: map-verifies-kyewif
+    type: VERIFIES
+    from: alloy:formal/architecture.als#assert:InventoryIsolation
+    to: openspec:booking-architecture/inventory-isolation
+    status: approved
+    approvedBy: benchmark-fixture (agent-authored, not human-reviewed)
+    approvedAt: 2026-11-15T08:37:33.660Z
+    rationale: WebApp must not depend on SeatInventory (LikeC4 projection)
+    fingerprints:
+      from: 1ecec80e9c5ad263
+      to: 53ce5edd0a2f018d
+  - id: map-verifies-ghost
+    type: VERIFIES
+    from: alloy:formal/booking.als#assert:NoOverbooking
+    to: openspec:seat-hold/single-seat-hold
+    status: approved
+    approvedBy: benchmark-fixture (agent-authored, not human-reviewed)
+    rationale: refers to an assertion that does not exist in the model

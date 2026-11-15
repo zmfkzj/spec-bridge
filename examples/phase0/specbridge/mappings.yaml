@@ -1,0 +1,9 @@
+# Approved semantic mappings (human-reviewed data; SpecBridge never writes "approved" on its own).
+mappings:
+  - id: phase0-verifies
+    type: VERIFIES
+    from: alloy:formal/jobs.als#assert:NoDoubleAssignment
+    to: openspec:job-claim/exclusive-job-claim
+    status: approved
+    approvedBy: phase0-poc-author
+    rationale: The assertion states that a job never has more than one owner, which is the requirement's at-most-one-worker condition.

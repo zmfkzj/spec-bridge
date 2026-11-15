@@ -1,0 +1,46 @@
+# Approved/rejected semantic mappings. Human-reviewed data: edit via `specbridge mapping approve|reject`.
+mappings:
+  - id: map-verifies-52a6sq
+    type: VERIFIES
+    from: alloy:formal/jobs.als#assert:NoDoubleAssignment
+    to: openspec:job-claim/exclusive-job-claim
+    status: approved
+    approvedBy: example-fixture (agent-authored example data, not human-reviewed)
+    approvedAt: 2026-11-15T08:29:47.450Z
+    rationale: lone owner per job = at most one worker per job
+    fingerprints:
+      from: 35bf704ff2f38dd1
+      to: 9a0ebf6e8506e854
+  - id: map-verifies-l3ldfd
+    type: VERIFIES
+    from: alloy:formal/jobs.als#assert:ClaimedHasOwner
+    to: openspec:job-claim/exclusive-job-claim
+    status: approved
+    approvedBy: example-fixture (agent-authored example data, not human-reviewed)
+    approvedAt: 2026-11-15T08:29:49.646Z
+    rationale: a claimed job has exactly one owner
+    fingerprints:
+      from: 9d8a118af7b7c57e
+      to: 9a0ebf6e8506e854
+  - id: map-corresponds_to-hkb4t5
+    type: CORRESPONDS_TO
+    from: alloy:formal/jobs.als#sig:Job
+    to: typespec:type:JobApi.Job
+    status: approved
+    approvedBy: example-fixture (agent-authored example data, not human-reviewed)
+    approvedAt: 2026-11-15T08:29:51.861Z
+    rationale: Alloy Job models the stored job resource of the Job API
+    fingerprints:
+      from: d4061fc2758566f5
+      to: fe2dd086b3be5279
+  - id: map-verifies-dtdmux
+    type: VERIFIES
+    from: alloy:formal/architecture.als#assert:QueueIsolation
+    to: openspec:platform-architecture/queue-isolation
+    status: approved
+    approvedBy: example-fixture (agent-authored example data, not human-reviewed)
+    approvedAt: 2026-11-15T08:29:54.048Z
+    rationale: WebApp must not depend on JobQueue (checked on the LikeC4 projection)
+    fingerprints:
+      from: 6420b9be7ca9e195
+      to: 1250f47cd5cc9c89

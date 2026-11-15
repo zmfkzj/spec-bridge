@@ -1,0 +1,8 @@
+class: 2. requirement vs API required-field conflict
+reviewStatus: agent-authored ground truth; NOT reviewed by a human
+description: HoldRequest.customerId made optional in TypeSpec while the requirement demands it in the request.
+command: [verify, --base-ref, HEAD]
+expected:
+  overallVerdict: CONFLICT
+  conflicts:
+    - { defect: customerId-optional, rules: [RC-REQUIRED-OPTIONAL], anchors: ["typespec:field:BookingApi.HoldRequest.customerId"] }

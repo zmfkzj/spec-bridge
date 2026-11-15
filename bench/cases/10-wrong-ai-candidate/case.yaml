@@ -1,0 +1,14 @@
+class: 10. wrong AI link candidate
+reviewStatus: agent-authored ground truth; NOT reviewed by a human
+description: A stub stands in for an AI provider (bench/fixtures/stub-ai.sh, no model is called) and proposes a wrong VERIFIES link. It must stay a proposal and change nothing.
+pre:
+  - [link, --ai]
+env:
+  SPECBRIDGE_AI_COMMAND: "{repo}/bench/fixtures/stub-ai.sh"
+command: [verify, --base-ref, HEAD]
+expected:
+  overallVerdict: CONSISTENT
+  conflicts: []
+  mappings:
+    absent:
+      - { type: VERIFIES, from: "alloy:formal/booking.als#assert:SingleHolder", to: "openspec:payment/payment-confirmation" }

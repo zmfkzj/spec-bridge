@@ -1,0 +1,111 @@
+[
+ {
+  "scenario": "A-requirement-change",
+  "title": "Requirement change via OpenSpec change add-job-lease",
+  "exitCode": 1,
+  "wallMs": 6734,
+  "overall": {
+   "status": "FAIL",
+   "verdict": "CONFLICT",
+   "exitCode": 1,
+   "reasons": [
+    "2 conflict(s): RC-FIELD-MISSING, RC-REQUIRED-OPTIONAL"
+   ]
+  },
+  "conflicts": [
+   "RC-FIELD-MISSING: requirement constrains Job.leaseExpiresAt (Required) but TypeSpec model JobApi.Job has no property 'leaseExpiresAt'",
+   "RC-REQUIRED-OPTIONAL: ClaimRequest.leaseSeconds: requirement \"`ClaimRequest.leaseSeconds` MUST be present in request.\" vs typespec \"JobApi.ClaimRequest.leaseSeconds is optional (requ"
+  ],
+  "impacted": 17,
+  "invalidatedMappings": [
+   "map-verifies-52a6sq",
+   "map-verifies-l3ldfd"
+  ]
+ },
+ {
+  "scenario": "B-api-change",
+  "title": "API contract change checked with oasdiff and traced to architecture/requirements",
+  "exitCode": 1,
+  "wallMs": 5054,
+  "overall": {
+   "status": "FAIL",
+   "verdict": "CONFLICT",
+   "exitCode": 1,
+   "reasons": [
+    "3 conflict(s): RC-ERROR-RESPONSE, RC-REQUIRED-OPTIONAL, API-BREAKING-CHANGE"
+   ]
+  },
+  "conflicts": [
+   "RC-ERROR-RESPONSE: requirement demands status 409 from JobApi.Jobs.claimJob, but the contract's closed response set is {200, 404}",
+   "RC-REQUIRED-OPTIONAL: ClaimRequest.workerId: requirement \"`ClaimRequest.workerId` MUST be present in request.\" vs typespec \"JobApi.ClaimRequest.workerId is optional (request)\": requi",
+   "API-BREAKING-CHANGE: oasdiff request-property-became-required: the request property `priority` became required (POST /jobs) -> typespec:op:JobApi.Jobs.submitJob; consumers: likec4:j"
+  ],
+  "impacted": 12,
+  "invalidatedMappings": []
+ },
+ {
+  "scenario": "C-architecture-change",
+  "title": "Architecture change violating architecture invariants and API ownership",
+  "exitCode": 1,
+  "wallMs": 5095,
+  "overall": {
+   "status": "FAIL",
+   "verdict": "CONFLICT",
+   "exitCode": 1,
+   "reasons": [
+    "6 conflict(s): AA-PROVIDER-CONFLICT, AI-PROJECTION-COUNTEREXAMPLE, XS-FORBIDDEN-DEPENDENCY, XS-OWNERSHIP, RI-COUNTEREXAMPLE"
+   ]
+  },
+  "conflicts": [
+   "AA-PROVIDER-CONFLICT: operation JobApi.Jobs.claimJob has 2 unrelated providers (likec4:jobs.jobService, likec4:jobs.webApp); policy singleProvider requires exactly one",
+   "AI-PROJECTION-COUNTEREXAMPLE: LikeC4 architecture violates Alloy assertion QueueIsolation (formal/architecture.als); projected relations in the counterexample: likec4:jobs.webApp -> likec4:j",
+   "AI-PROJECTION-COUNTEREXAMPLE: LikeC4 architecture violates Alloy assertion NoCycles (formal/architecture.als); projected relations in the counterexample: likec4:jobs.webApp -> likec4:jobs.jo",
+   "XS-FORBIDDEN-DEPENDENCY: architecture relation likec4:jobs.webApp -> likec4:jobs.jobQueue violates \"`jobs.webApp` MUST NOT depend on `jobs.jobQueue`.\"",
+   "XS-OWNERSHIP: requirement says likec4:jobs.jobService must be the only provider of JobApi.Jobs.claimJob, but it is also/instead provided by likec4:jobs.webApp",
+   "RI-COUNTEREXAMPLE: Alloy found a counterexample to QueueIsolation (Check specbridge_QueueIsolation for 3); it maps to requirement \"Queue isolation\". Atoms: WebApp$0=likec4:jobs.we"
+  ],
+  "impacted": 22,
+  "invalidatedMappings": []
+ },
+ {
+  "scenario": "D-logical-error",
+  "title": "Alloy finds an invariant counterexample in the behaviour model",
+  "exitCode": 1,
+  "wallMs": 3111,
+  "overall": {
+   "status": "FAIL",
+   "verdict": "CONFLICT",
+   "exitCode": 1,
+   "reasons": [
+    "2 conflict(s): RI-COUNTEREXAMPLE"
+   ]
+  },
+  "conflicts": [
+   "RI-COUNTEREXAMPLE: Alloy found a counterexample to ClaimedHasOwner (Check ClaimedHasOwner for 3 but 6 steps); it maps to requirement \"Exclusive job claim\". Atoms: Queued$0, Claime",
+   "RI-COUNTEREXAMPLE: Alloy found a counterexample to NoDoubleAssignment (Check NoDoubleAssignment for 3 but 6 steps); it maps to requirement \"Exclusive job claim\". Atoms: Queued$0, "
+  ],
+  "impacted": null,
+  "invalidatedMappings": null
+ },
+ {
+  "scenario": "E-spec-contradiction",
+  "title": "OpenSpec requirement contradicts TypeSpec contract (structured constraints)",
+  "exitCode": 1,
+  "wallMs": 2196,
+  "overall": {
+   "status": "FAIL",
+   "verdict": "CONFLICT",
+   "exitCode": 1,
+   "reasons": [
+    "2 conflict(s): RC-RANGE-RANGE, RC-REQUIRED-OPTIONAL",
+    "analysis mode: formal/API checks are not executed by `analyze`; use `specbridge verify` for executed evidence"
+   ]
+  },
+  "conflicts": [
+   "RC-RANGE-RANGE: ClaimRequest.leaseSeconds: requirement \"`ClaimRequest.leaseSeconds` MUST be between 30 and 3600 seconds.\" vs typespec \"JobApi.ClaimRequest.leaseSeconds in [1, 8",
+   "RC-REQUIRED-OPTIONAL: ClaimRequest.workerId: requirement \"`ClaimRequest.workerId` MUST be present in request.\" vs typespec \"JobApi.ClaimRequest.workerId is optional (request)\": requi"
+  ],
+  "impacted": null,
+  "invalidatedMappings": null
+ }
+]

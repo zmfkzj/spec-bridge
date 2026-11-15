@@ -1,0 +1,1 @@
+{ "title": "API contract change checked with oasdiff and traced to architecture/requirements", "args": ["verify", "--base-ref", "HEAD"] }

@@ -1,0 +1,9 @@
+class: 4. reference to a missing API operation
+reviewStatus: agent-authored ground truth; NOT reviewed by a human
+description: OpenSpec names Reservations.confirmPayment and LikeC4 names BookingApi.Reservations.cancel; neither exists in TypeSpec.
+command: [verify, --base-ref, HEAD]
+expected:
+  overallVerdict: CONFLICT
+  conflicts:
+    - { defect: requirement-missing-op, rules: [RC-MISSING-OPERATION], anchors: ["Reservations.confirmPayment"] }
+    - { defect: architecture-missing-op, rules: [AA-DANGLING-OPERATION], anchors: ["BookingApi.Reservations.cancel"] }

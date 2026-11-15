@@ -1,0 +1,50 @@
+name: specbridge-ci
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: '24', cache: npm }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '17' }
+      - run: npm ci
+      - run: bash scripts/setup-tools.sh          # pinned oasdiff + Alloy with checksum verification
+      - run: npm run typecheck
+      - run: npm test                              # unit + CLI + scenarios A-E
+      - run: npm run poc                           # Phase 0 PoC stays executable
+      - run: npm run bench                         # 15-case semantic benchmark + regression gate
+      - run: npm run scenarios
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: specbridge-evidence
+          path: |
+            bench/results/
+            evidence/
+
+  # Example of using SpecBridge as a design gate on a spec workspace.
+  # exit 0 CONSISTENT, 1 CONFLICT, 2 ERROR, 3 UNKNOWN/SKIP. The example workspace has documented
+  # UNKNOWNs, so this job allows them explicitly instead of hiding them.
+  design-gate-example:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: '24', cache: npm }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '17' }
+      - run: npm ci && bash scripts/setup-tools.sh
+      - run: node bin/specbridge.mjs verify -w examples/jobs-platform --allow-unknown --format json --out specbridge-report.json
+      - run: node bin/specbridge.mjs report -w examples/jobs-platform --allow-unknown
+      - uses: actions/upload-artifact@v4
+        with: { name: specbridge-report, path: specbridge-report.json }

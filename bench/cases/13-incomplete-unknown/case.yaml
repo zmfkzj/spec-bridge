@@ -1,0 +1,12 @@
+class: 13. UNKNOWN caused by incomplete specification
+reviewStatus: agent-authored ground truth; NOT reviewed by a human
+description: A length bound the contract does not state, and a vague normative sentence; both must be UNKNOWN, not CONFLICT and not CONSISTENT.
+command: [verify, --base-ref, HEAD]
+expected:
+  overallVerdict: UNKNOWN
+  conflicts: []
+  unknowns:
+    - { rules: [RC-RANGE-MISSING, RC-RANGE-RANGE], anchors: ["typespec:field:BookingApi.ConfirmRequest.paymentToken"] }
+    - { rules: [REQ-AMBIGUOUS-NL], anchors: ["openspec:payment/payment-confirmation"] }
+  mustNotConflict:
+    - { anchors: ["typespec:field:BookingApi.ConfirmRequest.paymentToken"] }

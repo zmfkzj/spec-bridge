@@ -1,0 +1,9 @@
+class: 7. Alloy assertion counterexample
+reviewStatus: agent-authored ground truth; NOT reviewed by a human
+description: hold no longer requires a free seat and accumulates holders; SingleHolder and HeldHasHolder fail.
+command: [verify, --base-ref, HEAD]
+expected:
+  overallVerdict: CONFLICT
+  conflicts:
+    - { defect: single-holder-violated, rules: [RI-COUNTEREXAMPLE, TOOL-ALLOY-COUNTEREXAMPLE], anchors: ["alloy:formal/booking.als#assert:SingleHolder"], traceRequirement: "openspec:seat-hold/single-seat-hold" }
+    - { defect: held-has-holder-violated, rules: [RI-COUNTEREXAMPLE, TOOL-ALLOY-COUNTEREXAMPLE], anchors: ["alloy:formal/booking.als#assert:HeldHasHolder"], traceRequirement: "openspec:seat-hold/single-seat-hold" }

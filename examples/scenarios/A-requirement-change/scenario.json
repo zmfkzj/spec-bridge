@@ -1,0 +1,1 @@
+{ "title": "Requirement change via OpenSpec change add-job-lease", "args": ["verify", "--change", "add-job-lease", "--base-ref", "HEAD"] }
