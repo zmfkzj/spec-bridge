@@ -7,3 +7,5 @@ tools/java-build/
 .specbridge/
 **/.specbridge/
 .work/
+.codegraph/
+.archify/
