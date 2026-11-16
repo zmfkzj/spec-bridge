@@ -67,6 +67,7 @@ specbridge/mappings.yaml      # approved/rejected semantic mappings (human-revie
 
 ## Documentation
 
+- [SpecBridge 한글 사용 매뉴얼 (HTML)](.archify/explainer-specbridge-manual-ko-20261115-194006/specbridge-manual-ko.html) — Korean hands-on user manual (install, quick start, approvals, verify, exit codes, limitations); open the file in a browser
 - [docs/usage.md](docs/usage.md) — CLI reference, configuration, conventions for explicit links
 - [docs/architecture.md](docs/architecture.md) — layers, data flow, rule catalogue
 - [docs/ir.md](docs/ir.md) — Semantic IR schema, identities, trust, provenance, constraint notation (SCN)
